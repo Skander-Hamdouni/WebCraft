@@ -3,8 +3,8 @@
 import { initSupabase, handleSignIn, handleSignUp, handleLogout, handleGoogleSignIn, handleGithubSignIn } from './auth.js';
 import { goPage, updateNav } from './navigation.js';
 import { showToast, animateCount, switchLoginTab, filterTpl, copyParrain, initKeyboardShortcuts, showConfirm, showPrompt, _genericConfirmOk, _genericConfirmCancel, _genericPromptOk, _genericPromptCancel } from './ui.js';
-import { initDefaultCanvas, addEl, renderEl, renderCanvas, selectElById, canvasClick, saveState, undo, redo, updateCanvasHeight, renderLayers, updateHistoryUI, bringForward, sendBackward, extendCanvasPage, enterTrimMode, exitTrimMode, trimToLastElement, handleImageUpload, alignGroup, distributeGroup, setGroupPadding, delGroupEls, setCanvasBg, enterGroupMode, exitGroupMode } from './canvas.js';
-import { updateSwatches, updateCodePreview, updateElText, updateElPos, updatePosFields, setElBg, setElColor, updatePadding, updateMargin, duplicateEl, delEl, updateTextStyle, toggleTextStyle, setTextAlign, updateBlockField, updateBlockItem, addBlockItem, removeBlockItem, moveBlockItemUp, moveBlockItemDown, resetBlockLayout, handleGalleryItemUpload } from './properties.js';
+import { initDefaultCanvas, addEl, renderEl, renderCanvas, selectElById, canvasClick, saveState, undo, redo, updateCanvasHeight, renderLayers, updateHistoryUI, bringForward, sendBackward, extendCanvasPage, enterTrimMode, exitTrimMode, trimToLastElement, handleImageUpload, alignGroup, distributeGroup, setGroupPadding, delGroupEls, setCanvasBg } from './canvas.js';
+import { updateSwatches, updateCodePreview, updateElText, updateElPos, updatePosFields, setElBg, setElColor, updatePadding, updateMargin, duplicateEl, delEl, updateTextStyle, toggleTextStyle, setTextAlign, updateBlockField, updateBlockItem, addBlockItem, removeBlockItem, moveBlockItemUp, moveBlockItemDown, handleGalleryItemUpload, _getSelectedId } from './properties.js';
 import { applyAnimation, updateAnimationPreview, removeAnimation, toggleAnimationOrganizer, updateAnimationTimeline, updateAnimationTrigger } from './animations.js';
 import { loadTemplate, clearCanvas, addPage, renamePage, deletePage, switchPage, renderPagesList, startDrag, endDrag, dropOnCanvas, switchETab, toggleDevice } from './editor.js';
 import { loadUserData, loadUserSites, loadSiteForEditing, autoSaveCanvas, createNewSite, deleteSite, viewSite, closeNameModal, confirmNameModal, loadProfilePage, copyProfileReferral } from './supabase-data.js';
@@ -25,11 +25,10 @@ window.__wc = {
   addEl, canvasClick, undo, redo, bringForward, sendBackward,
   extendCanvasPage, enterTrimMode, exitTrimMode, trimToLastElement, handleImageUpload,
   alignGroup, distributeGroup, setGroupPadding, delGroupEls, setCanvasBg,
-  enterGroupMode, exitGroupMode,
   // Properties
   updateElText, updateElPos, setElBg, setElColor, updatePadding, updateMargin, duplicateEl, delEl,
   updateTextStyle, toggleTextStyle, setTextAlign,
-  updateBlockField, updateBlockItem, addBlockItem, removeBlockItem, moveBlockItemUp, moveBlockItemDown, resetBlockLayout, handleGalleryItemUpload,
+  updateBlockField, updateBlockItem, addBlockItem, removeBlockItem, moveBlockItemUp, moveBlockItemDown, handleGalleryItemUpload, _getSelectedId,
   // Animations
   applyAnimation, updateAnimationPreview, removeAnimation, toggleAnimationOrganizer, updateAnimationTrigger,
   // Editor

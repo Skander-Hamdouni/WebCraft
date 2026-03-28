@@ -115,14 +115,10 @@ export function initKeyboardShortcuts() {
         import('./properties.js').then(function(props) { props.delEl(state.selectedEl); });
       } else if (e.key === 'Escape') {
         e.preventDefault();
-        if (state.groupEditingId) {
-          canvas.exitGroupMode();
-        } else {
-          state.selectedEl = null;
-          document.querySelectorAll('.canvas-el').forEach(function(x) { x.classList.remove('selected'); });
-          document.getElementById('no-sel-msg').style.display = 'block';
-          document.getElementById('props-panel').style.display = 'none';
-        }
+        state.selectedEl = null;
+        document.querySelectorAll('.canvas-el').forEach(function(x) { x.classList.remove('selected'); });
+        document.getElementById('no-sel-msg').style.display = 'block';
+        document.getElementById('props-panel').style.display = 'none';
       } else if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key) && state.selectedEl && state.els[state.selectedEl]) {
         e.preventDefault();
         var d = state.els[state.selectedEl];

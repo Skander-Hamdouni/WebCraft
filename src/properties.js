@@ -249,7 +249,9 @@ export function delEl(id) {
 
 var STRUCTURED_TYPES = ['nav','hero','heading','text','section','footer','banner','alert',
   'card','cta','video','quote','testimonial','list','features','team','steps',
-  'stats','progress','faq','gallery','social','logobar','newsletter','countdown','map','table','pricing'];
+  'stats','progress','faq','gallery','social','logobar','newsletter','countdown','map','table','pricing',
+  'feature_item','team_member','stat_item','step_item','faq_item','progress_item','pricing_plan',
+  'gallery_item','logo_item','list_item','section_col'];
 
 var _defaultItems = {
   nav: {text:'Nouveau lien'},
@@ -396,6 +398,38 @@ export function initBlockDataFromText(d) {
         {name:'Pro',price:'29€',period:'/mois',features:'✓ Tout le Gratuit\n✓ Fonctionnalité 3\n✓ Fonctionnalité 4',buttonText:'Essayer',featured:true},
         {name:'Business',price:'99€',period:'/mois',features:'✓ Tout le Pro\n✓ Support dédié',buttonText:'Contacter',featured:false}
       ];
+      break;
+    case 'feature_item':
+      if (!d.fields) d.fields = { icon: '⭐', title: 'Titre', description: 'Description.' };
+      break;
+    case 'team_member':
+      if (!d.fields) d.fields = { name: 'Prénom Nom', role: 'Poste' };
+      break;
+    case 'stat_item':
+      if (!d.fields) d.fields = { number: '99', label: 'Clients' };
+      break;
+    case 'step_item':
+      if (!d.fields) d.fields = { num: '1', title: 'Étape', description: 'Description.' };
+      break;
+    case 'faq_item':
+      if (!d.fields) d.fields = { question: 'Question ?', answer: 'Réponse.' };
+      break;
+    case 'progress_item':
+      if (!d.fields) d.fields = { label: 'Compétence', value: '75' };
+      break;
+    case 'pricing_plan':
+      if (!d.fields) d.fields = { name: 'Plan', price: '0€', period: '/mois', features: '✓ Feature 1\n✓ Feature 2', buttonText: 'Commencer', featured: false };
+      break;
+    case 'gallery_item':
+      break;
+    case 'logo_item':
+      if (!d.fields) d.fields = { name: 'Logo' };
+      break;
+    case 'list_item':
+      if (!d.fields) d.fields = { text: d.text || 'Item de liste' };
+      break;
+    case 'section_col':
+      if (!d.fields) d.fields = { text: d.text || 'Contenu de la colonne' };
       break;
   }
 }
@@ -626,17 +660,51 @@ export function renderBlockFields(d) {
         {key:'buttonText',label:'Texte du bouton',type:'input'}
       ],'Ajouter un plan',1);
       break;
-  }
-
-  // "Enter group mode" hint + reset layout button for item blocks
-  var hasItems = items && items.length > 0;
-  var hasPositions = hasItems && items.some(function(i) { return i.x !== undefined; });
-  if (hasItems) {
-    html += '<div class="bf-group-hint">'
-      + (hasPositions
-        ? '<button class="bf-reset-layout" onclick="window.__wc.resetBlockLayout()">↺ Réinitialiser la mise en page</button>'
-        : '<span>Double-cliquez sur le bloc pour déplacer les éléments librement</span>')
-      + '</div>';
+    case 'feature_item':
+      html += _fieldInput('Icône (emoji)','icon',f.icon||'');
+      html += _fieldInput('Titre','title',f.title||'');
+      html += _fieldInput('Description','description',f.description||'');
+      break;
+    case 'team_member':
+      html += _fieldInput('Nom','name',f.name||'');
+      html += _fieldInput('Rôle / Poste','role',f.role||'');
+      break;
+    case 'stat_item':
+      html += _fieldInput('Chiffre / Valeur','number',f.number||'');
+      html += _fieldInput('Libellé','label',f.label||'');
+      break;
+    case 'step_item':
+      html += _fieldInput('Numéro','num',f.num||'');
+      html += _fieldInput('Titre','title',f.title||'');
+      html += _fieldInput('Description','description',f.description||'');
+      break;
+    case 'faq_item':
+      html += _fieldInput('Question','question',f.question||'');
+      html += _fieldTextarea('Réponse','answer',f.answer||'');
+      break;
+    case 'progress_item':
+      html += _fieldInput('Libellé','label',f.label||'');
+      html += _fieldInput('Pourcentage (0-100)','value',f.value||'');
+      break;
+    case 'pricing_plan':
+      html += _fieldInput('Nom du plan','name',f.name||'');
+      html += _fieldInput('Prix','price',f.price||'');
+      html += _fieldInput('Période','period',f.period||'');
+      html += _fieldTextarea('Fonctionnalités (une par ligne)','features',f.features||'');
+      html += _fieldInput('Texte du bouton','buttonText',f.buttonText||'');
+      break;
+    case 'logo_item':
+      html += _fieldInput('Nom du logo','name',f.name||'');
+      break;
+    case 'list_item':
+      html += _fieldInput('Texte de l\'item','text',f.text||'');
+      break;
+    case 'section_col':
+      html += _fieldTextarea('Contenu de la colonne','text',f.text||'');
+      break;
+    case 'gallery_item':
+      html += '<div class="bf-row"><label class="bf-label">Image</label><button class="bf-add-btn" style="width:auto;padding:.3rem .8rem;" onclick="document.getElementById(\'image-upload-\'+window.__wc._getSelectedId()).click()">📷 Changer l\'image</button></div>';
+      break;
   }
 
   container.innerHTML = html;
@@ -693,15 +761,8 @@ export function removeBlockItem(itemIndex) {
   renderBlockFields(d);
 }
 
-export function resetBlockLayout() {
-  if (!state.selectedEl || !state.els[state.selectedEl]) return;
-  var d = state.els[state.selectedEl];
-  if (!d.items) return;
-  d.items.forEach(function(item) { delete item.x; delete item.y; });
-  renderEl(d);
-  saveState();
-  renderBlockFields(d);
-}
+// (helper used in gallery_item fields)
+export function _getSelectedId() { return state.selectedEl || ''; }
 
 export function moveBlockItemUp(idx) {
   if (!state.selectedEl || !state.els[state.selectedEl]) return;

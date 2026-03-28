@@ -40,6 +40,4 @@ export const state = {
   trimModeActive: false,
   trimModeIgnoreClick: false,
 
-  // Mode groupe (édition de sous-éléments)
-  groupEditingId: null,
 };

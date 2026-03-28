@@ -5,6 +5,142 @@ import { elDefs, defaultTexts, layerColors } from './defs.js';
 import { showToast } from './ui.js';
 import { updatePosFields, updateCodePreview, updateSwatches, applyTextStyles, populateTextPanel, initBlockDataFromText, renderBlockFields } from './properties.js';
 
+// ---- Règles de décomposition des blocs en éléments indépendants ----
+var _blockDecompose = {
+  hero: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    return [
+      { type: 'heading', x: x, y: y,       fields: { title: f.title || 'Bienvenue sur mon site' }, bg: '#E1F5EE', fullWidth: true },
+      { type: 'text',    x: x, y: y+70,    fields: { title: '', body: f.subtitle || 'Décrivez votre activité en quelques mots accrocheurs.' }, bg: '#E1F5EE', fullWidth: true },
+      { type: 'cta',     x: x, y: y+170,   fields: { title: '', buttonText: f.buttonText || 'Découvrir →' }, bg: '#E1F5EE', fullWidth: true }
+    ];
+  },
+  features: function(x, y, d) {
+    var items = (d && d.items) || [
+      {icon:'⚡',title:'Rapide',description:'Description courte.'},
+      {icon:'🔒',title:'Sécurisé',description:'Description courte.'},
+      {icon:'🎯',title:'Précis',description:'Description courte.'},
+      {icon:'💡',title:'Intuitif',description:'Description courte.'}
+    ];
+    var gap = 230;
+    return items.map(function(item, i) {
+      return { type: 'feature_item', x: x + i * gap, y: y, fields: { icon: item.icon||'⭐', title: item.title||'Feature', description: item.description||'Description.' }, bg: '#f5f5f4' };
+    });
+  },
+  team: function(x, y, d) {
+    var items = (d && d.items) || [
+      {name:'Jean',role:'CEO'},{name:'Marie',role:'Design'},{name:'Paul',role:'Dev'},{name:'Sofia',role:'Marketing'}
+    ];
+    var gap = 230;
+    return items.map(function(item, i) {
+      return { type: 'team_member', x: x + i * gap, y: y, fields: { name: item.name||'Nom', role: item.role||'Rôle' }, bg: '#f5f5f4' };
+    });
+  },
+  stats: function(x, y, d) {
+    var items = (d && d.items) || [
+      {number:'99',label:'Clients'},{number:'500',label:'Projets'},{number:'10K',label:'Users'}
+    ];
+    var gap = 310;
+    return items.map(function(item, i) {
+      return { type: 'stat_item', x: x + i * gap, y: y, fields: { number: item.number||'0', label: item.label||'Stat' }, bg: '#E1F5EE' };
+    });
+  },
+  steps: function(x, y, d) {
+    var items = (d && d.items) || [
+      {title:'Créer',description:'Créez votre compte'},{title:'Configurer',description:'Personnalisez'},{title:'Lancer',description:'Publiez'}
+    ];
+    var gap = 310;
+    return items.map(function(item, i) {
+      return { type: 'step_item', x: x + i * gap, y: y, fields: { num: String(i+1), title: item.title||'Étape', description: item.description||'' }, bg: '#EEEDFE' };
+    });
+  },
+  progress: function(x, y, d) {
+    var items = (d && d.items) || [
+      {label:'Design',value:'90'},{label:'Développement',value:'75'},{label:'Marketing',value:'60'}
+    ];
+    return items.map(function(item, i) {
+      return { type: 'progress_item', x: x, y: y + i * 60, fields: { label: item.label||'Compétence', value: item.value||'50' }, bg: '#EEEDFE', fullWidth: true };
+    });
+  },
+  faq: function(x, y, d) {
+    var items = (d && d.items) || [
+      {question:'Comment ça fonctionne ?',answer:''},
+      {question:'Quel est le prix ?',answer:''},
+      {question:'Essai gratuit ?',answer:''},
+      {question:'Support ?',answer:''}
+    ];
+    return items.map(function(item, i) {
+      return { type: 'faq_item', x: x, y: y + i * 60, fields: { question: item.question||'Question ?', answer: item.answer||'' }, bg: '#f5f5f4', fullWidth: true };
+    });
+  },
+  gallery: function(x, y, d) {
+    var items = (d && d.items) || [{},{},{},{},{},{}];
+    var cols = 3;
+    var gw = 290, gh = 200, gap = 10;
+    return items.map(function(item, i) {
+      var col = i % cols;
+      var row = Math.floor(i / cols);
+      return { type: 'gallery_item', x: x + col * (gw + gap), y: y + row * (gh + gap), bg: '#f5f5f4' };
+    });
+  },
+  section: function(x, y, d) {
+    var items = (d && d.items) || [{text:'Colonne 1'},{text:'Colonne 2'},{text:'Colonne 3'}];
+    var colW = Math.floor(880 / items.length);
+    var gap = 10;
+    return items.map(function(item, i) {
+      return { type: 'section_col', x: x + i * (colW + gap), y: y, fields: { text: item.text||'Colonne' }, bg: '#f5f5f4' };
+    });
+  },
+  list: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    var items = (d && d.items) || [{text:'Premier item'},{text:'Deuxième item'},{text:'Troisième item'}];
+    var result = [
+      { type: 'heading', x: x, y: y, fields: { title: f.title||'Points clés' }, bg: '#f5f5f4', fullWidth: true }
+    ];
+    items.forEach(function(item, i) {
+      result.push({ type: 'list_item', x: x, y: y + 70 + i * 54, fields: { text: item.text||'Item' }, bg: '#f5f5f4', fullWidth: true });
+    });
+    return result;
+  },
+  pricing: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    var items = (d && d.items) || [
+      {name:'Gratuit',price:'0€',period:'/mois',features:'✓ Feature 1\n✓ Feature 2',buttonText:'Commencer',featured:false},
+      {name:'Pro',price:'29€',period:'/mois',features:'✓ Tout le Gratuit\n✓ Feature 3',buttonText:'Essayer',featured:true},
+      {name:'Business',price:'99€',period:'/mois',features:'✓ Tout le Pro\n✓ Support',buttonText:'Contacter',featured:false}
+    ];
+    var result = [
+      { type: 'heading', x: x, y: y, fields: { title: f.sectionTitle||'Tarification' }, bg: '#f5f5f4', fullWidth: true }
+    ];
+    var gap = 310;
+    items.forEach(function(item, i) {
+      result.push({ type: 'pricing_plan', x: x + i * gap, y: y + 70, fields: { name: item.name, price: item.price, period: item.period, features: item.features, buttonText: item.buttonText, featured: item.featured }, bg: '#f5f5f4' });
+    });
+    return result;
+  },
+  logobar: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    var items = (d && d.items) || [{name:'Logo A'},{name:'Logo B'},{name:'Logo C'},{name:'Logo D'},{name:'Logo E'}];
+    var result = [
+      { type: 'heading', x: x, y: y, fields: { title: f.label||'Ils nous font confiance' }, bg: '#f5f5f4', fullWidth: true }
+    ];
+    var gap = 190;
+    items.forEach(function(item, i) {
+      result.push({ type: 'logo_item', x: x + i * gap, y: y + 70, fields: { name: item.name||'Logo' }, bg: '#f5f5f4' });
+    });
+    return result;
+  },
+  newsletter: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    return [
+      { type: 'heading',  x: x, y: y,      fields: { title: f.title||'Restez informé' }, bg: '#1a1a1a', fullWidth: true },
+      { type: 'text',     x: x, y: y+70,   fields: { title: '', body: f.body||'Recevez les dernières actualités dans votre boîte mail.' }, bg: '#1a1a1a', fullWidth: true },
+      { type: 'cta',      x: x, y: y+160,  fields: { title: '', buttonText: 'S\'inscrire' }, bg: '#1a1a1a', fullWidth: true }
+    ];
+  },
+  testimonial: null // keep as single element
+};
+
 export function setCanvasBg(color) {
   if (state.pages[state.currentPageId]) state.pages[state.currentPageId].bg = color;
   var canvas = document.getElementById('canvas');
@@ -34,15 +170,33 @@ export function initDefaultCanvas() {
 }
 
 export function addEl(type, x, y, text) {
+  var decompose = _blockDecompose[type];
+  if (decompose) {
+    // Decompose block into independent elements
+    var atoms = decompose(Math.round(x / 10) * 10, Math.round(y / 10) * 10, null);
+    atoms.forEach(function(atom) { _createEl(atom.type, atom.x, atom.y, atom.fields, atom.bg, atom.fullWidth); });
+    updateCanvasHeight();
+    renderLayers();
+    return;
+  }
+  _createEl(type, x, y, null, null, false, text);
+  updateCanvasHeight();
+  renderLayers();
+}
+
+function _createEl(type, x, y, fields, bg, fullWidthOverride, text) {
   var id = 'el-' + (++state.elCounter);
   var def = elDefs[type];
+  if (!def) return;
   var canvasW = state.mobileMode ? 375 : 900;
+  var useFullWidth = fullWidthOverride !== undefined ? fullWidthOverride : !!def.fullWidth;
   var data = {
-    id, type,
+    id: id, type: type,
     label: def.label,
     x: Math.round(x / 10) * 10,
     y: Math.round(y / 10) * 10,
-    w: def.fullWidth ? canvasW : def.w, h: def.h, bg: def.bg,
+    w: useFullWidth ? canvasW : def.w, h: def.h,
+    bg: bg || def.bg,
     text: text || defaultTexts[type] || '',
     zIndex: Object.keys(state.els).length,
     paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0,
@@ -50,11 +204,12 @@ export function addEl(type, x, y, text) {
     imageData: null,
     color: '#1a1a1a'
   };
+  if (fields) {
+    data.fields = fields;
+  }
   state.els[id] = data;
   saveState();
   renderEl(data);
-  updateCanvasHeight();
-  renderLayers();
 }
 
 export function renderEl(d) {
@@ -92,14 +247,7 @@ export function renderEl(d) {
   });
 
   if (d.type !== 'image' && d.type !== 'divider' && d.type !== 'spacer') {
-    el.addEventListener('dblclick', function(e) {
-      e.stopPropagation();
-      if (_blockItemSel[d.type]) {
-        enterGroupMode(d.id);
-      } else {
-        enableEditMode(el, d);
-      }
-    });
+    el.addEventListener('dblclick', function(e) { e.stopPropagation(); enableEditMode(el, d); });
   }
 
   if (d.type === 'image') {
@@ -112,165 +260,21 @@ export function renderEl(d) {
     }
   }
 
+  if (d.type === 'gallery_item') {
+    var galleryArea = el.querySelector('.el-gallery-item-inner');
+    if (galleryArea) {
+      galleryArea.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var inp = document.getElementById('image-upload-' + d.id);
+        if (inp) inp.click();
+      });
+      galleryArea.style.cursor = 'pointer';
+    }
+  }
+
   makeDraggable(el, d);
   makeResizable(el, d);
   canvas.appendChild(el);
-  _applyItemPositions(el, d);
-  // If this block is the one being group-edited, re-enter group mode after re-render
-  if (state.groupEditingId === d.id) {
-    _activateGroupItems(el, d);
-  }
-}
-
-// CSS selector for draggable/selectable sub-items per block type
-var _blockItemSel = {
-  features: '.feature-item',
-  team: '.team-card',
-  steps: '.step-item',
-  stats: '.stat-box',
-  progress: '.progress-item',
-  faq: '.faq-item',
-  logobar: '.logo-item',
-  section: '.section-col',
-  pricing: '.pricing-card',
-  gallery: '.gallery-item',
-  list: 'li'
-};
-
-// Apply stored x/y positions to sub-items (free layout mode)
-function _applyItemPositions(el, d) {
-  var sel = _blockItemSel[d.type];
-  if (!sel || !d.items) return;
-  var hasPositions = d.items.some(function(i) { return i.x !== undefined; });
-  if (!hasPositions) return;
-  var inner = el.querySelector('[class*="-inner"]');
-  if (inner) inner.style.position = 'relative';
-  var subEls = el.querySelectorAll(sel);
-  subEls.forEach(function(subEl, idx) {
-    var item = d.items[idx];
-    if (item && item.x !== undefined) {
-      subEl.style.position = 'absolute';
-      subEl.style.left = item.x + 'px';
-      subEl.style.top = item.y + 'px';
-      subEl.style.margin = '0';
-    }
-  });
-}
-
-// Activate interactive sub-items after entering group mode
-function _activateGroupItems(el, d) {
-  var sel = _blockItemSel[d.type];
-  if (!sel) return;
-  el.classList.add('block-group-editing');
-  var subEls = el.querySelectorAll(sel);
-  subEls.forEach(function(subEl, idx) {
-    subEl.classList.add('group-sub-item');
-    _makeSubItemDraggable(subEl, el, d, idx);
-  });
-}
-
-function _makeSubItemDraggable(subEl, blockEl, d, idx) {
-  var dragging = false;
-  var startMouseX, startMouseY, startItemX, startItemY;
-
-  subEl.addEventListener('mousedown', function(e) {
-    if (e.target.closest('button, input, textarea, [contenteditable]')) return;
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Select this sub-item
-    blockEl.querySelectorAll('.group-sub-selected').forEach(function(x) { x.classList.remove('group-sub-selected'); });
-    subEl.classList.add('group-sub-selected');
-
-    // Focus in right panel
-    var container = document.getElementById('pp-block-fields');
-    if (container) {
-      var panelItems = container.querySelectorAll('.bf-item');
-      panelItems.forEach(function(it, i) { it.classList.toggle('bf-item-focused', i === idx); });
-      var target = panelItems[idx];
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    if (!d.items || !d.items[idx]) return;
-
-    dragging = true;
-    startMouseX = e.clientX;
-    startMouseY = e.clientY;
-    startItemX = d.items[idx].x || 0;
-    startItemY = d.items[idx].y || 0;
-
-    function onMove(e2) {
-      if (!dragging) return;
-      var dx = e2.clientX - startMouseX;
-      var dy = e2.clientY - startMouseY;
-      d.items[idx].x = Math.round((startItemX + dx) / 5) * 5;
-      d.items[idx].y = Math.round((startItemY + dy) / 5) * 5;
-      subEl.style.left = d.items[idx].x + 'px';
-      subEl.style.top = d.items[idx].y + 'px';
-    }
-    function onUp() {
-      if (!dragging) return;
-      dragging = false;
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
-      saveState();
-    }
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
-  });
-
-  subEl.addEventListener('click', function(e) { e.stopPropagation(); });
-}
-
-export function enterGroupMode(blockId) {
-  if (state.groupEditingId === blockId) return;
-  exitGroupMode();
-  var el = document.getElementById(blockId);
-  var d = state.els[blockId];
-  if (!el || !d) return;
-
-  var sel = _blockItemSel[d.type];
-  if (!sel) return;
-
-  selectElById(blockId);
-  state.groupEditingId = blockId;
-
-  // Initialize positions from DOM if items have none yet
-  var subEls = el.querySelectorAll(sel);
-  var inner = el.querySelector('[class*="-inner"]');
-  var innerRect = (inner || el).getBoundingClientRect();
-  var needsInit = !d.items || d.items.some(function(i) { return i.x === undefined; });
-
-  if (needsInit) {
-    if (!d.items) d.items = [];
-    subEls.forEach(function(subEl, idx) {
-      if (!d.items[idx]) d.items[idx] = {};
-      if (d.items[idx].x === undefined) {
-        var r = subEl.getBoundingClientRect();
-        d.items[idx].x = Math.round(r.left - innerRect.left);
-        d.items[idx].y = Math.round(r.top - innerRect.top);
-      }
-    });
-    // Re-render so items become absolutely positioned
-    renderEl(d);
-    saveState();
-    // renderEl re-calls _activateGroupItems because groupEditingId is set
-    return;
-  }
-
-  _activateGroupItems(el, d);
-}
-
-export function exitGroupMode() {
-  if (!state.groupEditingId) return;
-  var el = document.getElementById(state.groupEditingId);
-  if (el) {
-    el.classList.remove('block-group-editing');
-    el.querySelectorAll('.group-sub-item').forEach(function(sub) {
-      sub.classList.remove('group-sub-item', 'group-sub-selected');
-    });
-  }
-  state.groupEditingId = null;
 }
 
 function getElementContent(d) {
@@ -279,8 +283,15 @@ function getElementContent(d) {
       + '<input type="file" id="image-upload-' + d.id + '" accept="image/*" style="display:none;" onchange="window.__wc.handleImageUpload(this,\'' + d.id + '\')">';
   }
   var content = elDefs[d.type].html(d);
-  if (d.type === 'image') {
-    return content + '<input type="file" id="image-upload-' + d.id + '" accept="image/*" style="display:none;" onchange="window.__wc.handleImageUpload(this,\'' + d.id + '\')">';
+  if (d.type === 'image' || d.type === 'gallery_item') {
+    // Replace placeholder id in the pre-rendered HTML
+    content = content.replace(/image-upload-x/g, 'image-upload-' + d.id)
+                     .replace(/handleImageUpload\(this,'x'\)/g, "handleImageUpload(this,'" + d.id + "')");
+    if (d.imageData && d.type === 'gallery_item') {
+      return '<div class="el-gallery-item-inner"><div class="gallery-item" style="background-image:url('+d.imageData+');background-size:cover;background-position:center;height:100%;cursor:pointer;"></div></div>'
+        + '<input type="file" id="image-upload-' + d.id + '" accept="image/*" style="display:none;" onchange="window.__wc.handleImageUpload(this,\'' + d.id + '\')">';
+    }
+    return content;
   }
   return content;
 }
@@ -348,8 +359,6 @@ function makeDraggable(el, d) {
   var dragging = false;
   el.addEventListener('mousedown', function(e) {
     if (e.target.closest('.el-del, .el-dup, .resize-nub, button, input, [contenteditable="true"]')) return;
-    // In group mode, let sub-item dragging handle it
-    if (state.groupEditingId === d.id && e.target.closest('.group-sub-item')) return;
     // Ctrl/Meta+drag → laisser le canvas gérer le rectangle de sélection
     if (e.ctrlKey || e.metaKey) return;
     e.preventDefault(); e.stopPropagation();
@@ -455,9 +464,6 @@ function toggleElSelection(id) {
 }
 
 export function selectElById(id) {
-  // Exit group mode if selecting a different block
-  if (state.groupEditingId && state.groupEditingId !== id) exitGroupMode();
-
   var canvasWrap = document.getElementById('canvas-wrap');
   var savedScroll = canvasWrap ? canvasWrap.scrollTop : 0;
 
@@ -509,7 +515,6 @@ export function selectElById(id) {
 export function canvasClick(e) {
   if (e.target.id !== 'canvas') return;
   if (_suppressNextCanvasClick) { _suppressNextCanvasClick = false; return; }
-  exitGroupMode();
   var canvasWrap = document.getElementById('canvas-wrap');
   var savedScroll = canvasWrap ? canvasWrap.scrollTop : 0;
   document.querySelectorAll('.canvas-el').forEach(function(x) { x.classList.remove('selected'); });

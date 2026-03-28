@@ -530,6 +530,146 @@ export var elDefs = {
         +'</div>';
     }
   }
+  /* ── ÉLÉMENTS ATOMIQUES (générés par décomposition de blocs) ─── */
+  feature_item: {
+    label: 'Feature',
+    w: 200, h: 140, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var icon = _f(d,'icon','⭐');
+      var title = _f(d,'title','Titre');
+      var desc = _f(d,'description','Description de la fonctionnalité.');
+      return '<div class="el-feature-item-inner">'
+        +'<div class="feature-item"><div class="feature-icon">'+icon+'</div>'
+        +'<h4>'+title+'</h4><p>'+desc+'</p></div></div>';
+    }
+  },
+  team_member: {
+    label: 'Membre',
+    w: 180, h: 160, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var name = _f(d,'name','Prénom Nom');
+      var role = _f(d,'role','Poste');
+      return '<div class="el-team-member-inner">'
+        +'<div class="team-card"><div class="team-avatar"></div>'
+        +'<h4>'+name+'</h4><p>'+role+'</p></div></div>';
+    }
+  },
+  stat_item: {
+    label: 'Statistique',
+    w: 160, h: 100, x: 0, y: 0,
+    bg: '#E1F5EE',
+    html: function(d) {
+      var number = _f(d,'number','99');
+      var label = _f(d,'label','Clients');
+      return '<div class="el-stat-item-inner">'
+        +'<div class="stat-box"><div class="stat-number">'+number+'</div>'
+        +'<p>'+label+'</p></div></div>';
+    }
+  },
+  step_item: {
+    label: 'Étape',
+    w: 220, h: 130, x: 0, y: 0,
+    bg: '#EEEDFE',
+    html: function(d) {
+      var num = _f(d,'num','1');
+      var title = _f(d,'title','Étape');
+      var desc = _f(d,'description','Description de l\'étape.');
+      return '<div class="el-step-item-inner">'
+        +'<div class="step-item"><div class="step-num">'+num+'</div>'
+        +'<h4>'+title+'</h4><p>'+desc+'</p></div></div>';
+    }
+  },
+  faq_item: {
+    label: 'FAQ Item',
+    w: 900, h: 56, x: 0, y: 0, fullWidth: true,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var question = _f(d,'question','Question ?');
+      var answer = _f(d,'answer','Réponse ici.');
+      return '<div class="el-faq-item-inner">'
+        +'<div class="faq-item"><div class="faq-q"><span>'+question+'</span>'
+        +'<span class="faq-plus">+</span></div>'
+        +'<div class="faq-answer" style="display:none;padding:.5rem .75rem;font-size:.8rem;color:#555;">'+answer+'</div>'
+        +'</div></div>';
+    }
+  },
+  progress_item: {
+    label: 'Barre de progression',
+    w: 900, h: 50, x: 0, y: 0, fullWidth: true,
+    bg: '#EEEDFE',
+    html: function(d) {
+      var label = _f(d,'label','Compétence');
+      var value = _f(d,'value','75');
+      return '<div class="el-progress-item-inner">'
+        +'<div class="progress-item"><span class="progress-label">'+label+'</span>'
+        +'<div class="progress-bar"><div class="progress-fill" style="width:'+value+'%"></div></div>'
+        +'<span class="progress-pct">'+value+'%</span></div></div>';
+    }
+  },
+  pricing_plan: {
+    label: 'Plan tarifaire',
+    w: 260, h: 240, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var name = _f(d,'name','Plan');
+      var price = _f(d,'price','0€');
+      var period = _f(d,'period','/mois');
+      var features = _f(d,'features','✓ Feature 1\n✓ Feature 2');
+      var buttonText = _f(d,'buttonText','Commencer');
+      var featured = d.fields && d.fields.featured;
+      var featuresList = String(features).split('\n').filter(function(f){return f.trim();}).map(function(f){return'<li>'+f.trim()+'</li>';}).join('');
+      return '<div class="el-pricing-plan-inner">'
+        +'<div class="pricing-card'+(featured?' pricing-featured':'')+'">'
+        +(featured?'<div class="pricing-badge">Populaire</div>':'')
+        +'<div class="pricing-name">'+name+'</div>'
+        +'<div class="pricing-price">'+price+'<span>'+period+'</span></div>'
+        +'<ul>'+featuresList+'</ul>'
+        +'<button>'+buttonText+'</button></div></div>';
+    }
+  },
+  gallery_item: {
+    label: 'Image galerie',
+    w: 280, h: 200, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      if (d.imageData) {
+        return '<div class="el-gallery-item-inner"><div class="gallery-item" style="background-image:url('+d.imageData+');background-size:cover;background-position:center;height:100%;"></div></div>'
+          +'<input type="file" id="image-upload-'+(d.id||'x')+'" accept="image/*" style="display:none;" onchange="window.__wc.handleImageUpload(this,\''+(d.id||'x')+'\')">';
+      }
+      return '<div class="el-gallery-item-inner">'
+        +'<div class="gallery-item" style="height:100%;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:2rem;">🖼</div></div>'
+        +'<input type="file" id="image-upload-'+(d.id||'x')+'" accept="image/*" style="display:none;" onchange="window.__wc.handleImageUpload(this,\''+(d.id||'x')+'\')">';
+    }
+  },
+  logo_item: {
+    label: 'Logo partenaire',
+    w: 140, h: 70, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var name = _f(d,'name','Logo');
+      return '<div class="el-logo-item-inner"><div class="logo-item">'+name+'</div></div>';
+    }
+  },
+  list_item: {
+    label: 'Item de liste',
+    w: 400, h: 44, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var text = _f(d,'text', d.text||'Item de liste');
+      return '<div class="el-list-item-inner"><ul><li>'+text+'</li></ul></div>';
+    }
+  },
+  section_col: {
+    label: 'Colonne',
+    w: 280, h: 140, x: 0, y: 0,
+    bg: '#f5f5f4',
+    html: function(d) {
+      var text = _f(d,'text', d.text||'Contenu de la colonne');
+      return '<div class="el-section-col-inner"><div class="section-col">'+text+'</div></div>';
+    }
+  }
 };
 
 export var defaultTexts = {
@@ -564,7 +704,18 @@ export var defaultTexts = {
   newsletter: 'Restez informé',
   countdown: "L'offre se termine dans",
   map: '12 Rue de la Paix, Paris',
-  social: 'Suivez-nous'
+  social: 'Suivez-nous',
+  feature_item: '',
+  team_member: '',
+  stat_item: '',
+  step_item: '',
+  faq_item: '',
+  progress_item: '',
+  pricing_plan: '',
+  gallery_item: '',
+  logo_item: '',
+  list_item: '',
+  section_col: ''
 };
 
 export var layerColors = {
