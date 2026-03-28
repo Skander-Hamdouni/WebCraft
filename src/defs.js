@@ -529,7 +529,7 @@ export var elDefs = {
         +'</div>'
         +'</div>';
     }
-  }
+  },
   /* ── ÉLÉMENTS ATOMIQUES (générés par décomposition de blocs) ─── */
   feature_item: {
     label: 'Feature',
