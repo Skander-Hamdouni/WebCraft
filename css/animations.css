@@ -1,0 +1,74 @@
+/* ===== WEBCRAFT — animations.css ===== */
+
+/* ============================================
+   ELEMENT ANIMATIONS
+   ============================================ */
+
+/* Fade In */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide In from Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In from Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Zoom In */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Spin (Rotation) */
+@keyframes spin {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+/* Bounce */
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

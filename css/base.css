@@ -1,0 +1,36 @@
+/* ===== WEBCRAFT — base.css ===== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --coral:       #D85A30;
+  --coral-l:     #FAECE7;
+  --coral-m:     #F0997B;
+  --teal:        #1D9E75;
+  --teal-l:      #E1F5EE;
+  --teal-m:      #5DCAA5;
+  --purple:      #7F77DD;
+  --purple-l:    #EEEDFE;
+  --amber:       #BA7517;
+  --amber-l:     #FAEEDA;
+  --gray-l:      #F1EFE8;
+  --gray-m:      #888780;
+  --gray-d:      #444441;
+  --dark:        #1a1a1a;
+  --white:       #fff;
+  --border:      #e8e8e8;
+  --font:        'Syne', sans-serif;
+  --body:        'DM Sans', sans-serif;
+}
+
+body {
+  font-family: var(--body);
+  background: #f7f6f3;
+  color: var(--dark);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ---- Pages ---- */
+.page { display: none; min-height: calc(100vh - 46px); }
+.page.active { display: flex; flex-direction: column; }

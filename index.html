@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebCraft — Créez votre site sans coder</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&family=Inter:wght@400;500;600&family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600;700&family=Poppins:wght@400;500;600&family=Lato:wght@400;700&family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- APP NAV -->
+<nav class="app-nav">
+  <div class="app-logo" onclick="goPage('dashboard')">web<span>craft</span></div>
+  <div class="app-nav-links">
+    <button class="nav-btn" id="nb-login" onclick="goPage('login')">Connexion</button>
+    <button class="nav-btn" id="nb-dashboard" onclick="goPage('dashboard')" style="display:none">Dashboard</button>
+    <button class="nav-btn" id="nb-templates" onclick="goPage('templates')" style="display:none">Templates</button>
+    <button class="nav-btn" id="nb-editor" onclick="goPage('editor')" style="display:none">Éditeur</button>
+    <button class="nav-btn cta" id="nb-new" onclick="goPage('templates')" style="display:none">+ Nouveau site</button>
+    <button class="nav-btn" id="nb-profile" onclick="goPage('profile')" style="display:none">Profil</button>
+    <button class="nav-btn" id="nb-logout" onclick="handleLogout()" style="display:none">Déconnexion</button>
+  </div>
+</nav>
+
+<!-- ===== PAGE LANDING ===== -->
+<div class="page" id="page-landing">
+
+  <!-- Landing Nav -->
+  <nav class="landing-nav">
+    <div class="landing-logo" onclick="goPage('landing')">web<span>craft</span></div>
+    <div class="landing-nav-links">
+      <span class="landing-nav-link" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Fonctionnalités</span>
+      <span class="landing-nav-link" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Tarifs</span>
+      <button class="landing-btn-outline" onclick="goPage('login')">Se connecter</button>
+      <button class="landing-btn-cta" onclick="goPage('login')">Commencer gratuitement</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="landing-hero">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ No-code website builder</div>
+      <h1 class="hero-title">
+        Créez votre site web<br>
+        <span class="hero-gradient">en quelques minutes</span>
+      </h1>
+      <p class="hero-sub">Drag & drop, templates professionnels, export propre. Sans écrire une ligne de code.</p>
+      <div class="hero-ctas">
+        <button class="cta-primary" onclick="goPage('login')">Créer mon site gratuit →</button>
+        <button class="cta-secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Voir les fonctionnalités ↓</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Sites créés</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">1k+</span>
+          <span class="stat-label">Utilisateurs</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Possibilités</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="editor-mockup">
+        <div class="mockup-topbar">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+          <span>WebCraft Editor</span>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-sidebar">
+            <div class="mockup-el" style="--delay:0s"></div>
+            <div class="mockup-el" style="--delay:.15s"></div>
+            <div class="mockup-el" style="--delay:.3s"></div>
+            <div class="mockup-el" style="--delay:.45s"></div>
+          </div>
+          <div class="mockup-canvas">
+            <div class="mockup-block hero-block"></div>
+            <div class="mockup-block text-block"></div>
+            <div class="mockup-block img-block"></div>
+          </div>
+        </div>
+      </div>
+      <div class="float-card card-a">✦ Publié en 30s</div>
+      <div class="float-card card-b">🎨 Templates pro</div>
+      <div class="float-card card-c">⚡ Export HTML/CSS</div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="landing-features" id="features">
+    <div class="landing-section-inner">
+      <div class="section-label">FONCTIONNALITÉS</div>
+      <h2 class="section-title">Tout ce qu'il vous faut<br><span>pour créer, publier, briller</span></h2>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <span class="feature-icon">⚡</span>
+          <h3>Drag & Drop intuitif</h3>
+          <p>Glissez des éléments, repositionnez-les, redimensionnez. Votre créativité, sans contraintes techniques.</p>
+        </div>
+        <div class="feature-card featured reveal">
+          <span class="feature-icon">🎨</span>
+          <h3>Templates pro inclus</h3>
+          <p>Démarrez avec des modèles conçus par des designers. Personnalisez chaque détail en un clic.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">🚀</span>
+          <h3>Publication instantanée</h3>
+          <p>Publiez sur Vercel en un clic. Votre site est en ligne en moins de 30 secondes.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">💻</span>
+          <h3>Code propre exporté</h3>
+          <p>Obtenez un HTML/CSS sémantique et optimisé. Téléchargez, hébergez où vous voulez.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">📱</span>
+          <h3>Preview multi-device</h3>
+          <p>Visualisez votre site sur desktop, tablette et mobile avant de publier.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">✨</span>
+          <h3>Animations avancées</h3>
+          <p>Ajoutez des animations CSS sur chaque élément. Fade, slide, bounce — sans coder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="landing-pricing" id="pricing">
+    <div class="landing-section-inner">
+      <div class="section-label" style="text-align:center">TARIFS</div>
+      <h2 class="section-title" style="text-align:center">Simple, transparent,<br><span>sans surprises</span></h2>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <div class="pricing-plan">Gratuit</div>
+          <div class="pricing-price"><span class="price-amount">0€</span><span class="price-period">/mois</span></div>
+          <ul class="pricing-features">
+            <li>✓ 3 sites max</li>
+            <li>✓ Tous les templates</li>
+            <li>✓ Export HTML/CSS</li>
+            <li>✓ Hébergement Vercel</li>
+            <li class="disabled">✗ Domaine custom</li>
+            <li class="disabled">✗ Sans branding</li>
+          </ul>
+          <button class="pricing-cta outline" onclick="goPage('login')">Commencer gratuitement</button>
+        </div>
+        <div class="pricing-card popular reveal">
+          <div class="popular-badge">⭐ Populaire</div>
+          <div class="pricing-plan">Pro</div>
+          <div class="pricing-price"><span class="price-amount">9€</span><span class="price-period">/mois</span></div>
+          <ul class="pricing-features">
+            <li>✓ Sites illimités</li>
+            <li>✓ Tous les templates</li>
+            <li>✓ Export HTML/CSS</li>
+            <li>✓ Hébergement Vercel</li>
+            <li>✓ Domaine custom</li>
+            <li>✓ Sans branding</li>
+          </ul>
+          <button class="pricing-cta" onclick="goPage('login')">Commencer avec Pro →</button>
+        </div>
+        <div class="pricing-card reveal">
+          <div class="pricing-plan">Équipe</div>
+          <div class="pricing-price"><span class="price-amount">29€</span><span class="price-period">/mois</span></div>
+          <ul class="pricing-features">
+            <li>✓ Tout le plan Pro</li>
+            <li>✓ 5 membres d'équipe</li>
+            <li>✓ Collaboration temps réel</li>
+            <li>✓ Accès API</li>
+            <li>✓ Support prioritaire</li>
+            <li>✓ SLA garanti</li>
+          </ul>
+          <button class="pricing-cta outline" onclick="goPage('login')">Contacter l'équipe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="landing-final-cta">
+    <div class="final-cta-bg"><div class="blob blob-4"></div></div>
+    <div style="position:relative; z-index:2">
+      <h2>Prêt à créer votre site ?</h2>
+      <p>Rejoignez des centaines de créateurs qui font confiance à WebCraft.</p>
+      <button class="cta-primary large" onclick="goPage('login')">Créer mon compte gratuit →</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="footer-logo">web<span>craft</span></div>
+    <div class="footer-links">
+      <a onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Fonctionnalités</a>
+      <a onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Tarifs</a>
+      <a onclick="goPage('login')">Connexion</a>
+    </div>
+    <div class="footer-copy">© 2025 WebCraft — Créez sans coder.</div>
+  </footer>
+
+</div>
+
+<!-- ===== PAGE LOGIN ===== -->
+<div class="page" id="page-login">
+  <div class="login-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div id="login-inner">
+    <div class="login-left">
+      <button class="login-back" onclick="goPage('landing')">← Retour</button>
+      <div class="login-brand">web<span>craft</span></div>
+      <div class="login-tabs">
+        <div class="ltab active" onclick="switchLoginTab('signin',this)">Se connecter</div>
+        <div class="ltab" onclick="switchLoginTab('signup',this)">Créer un compte</div>
+      </div>
+      <div class="login-form" id="signin-form">
+        <div class="form-group">
+          <label>Adresse email</label>
+          <input type="email" id="signin-email" placeholder="skander@example.com">
+        </div>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" id="signin-password" placeholder="••••••••">
+        </div>
+        <button class="btn-full" onclick="handleSignIn()">Se connecter →</button>
+        <div id="signin-error" class="auth-error" style="display:none;"></div>
+        <div class="divider">ou</div>
+        <div class="social-btns">
+          <button class="social-btn" onclick="handleGoogleSignIn()">
+            <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Google
+          </button>
+          <button class="social-btn" onclick="handleGithubSignIn()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </button>
+        </div>
+      </div>
+      <div class="login-form" id="signup-form" style="display:none">
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input type="text" id="signup-name" placeholder="Skander Hamdouni">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signup-email" placeholder="skander@efrei.net">
+        </div>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" id="signup-password" placeholder="8 caractères minimum">
+        </div>
+        <div class="form-group">
+          <label>Code parrain (optionnel)</label>
+          <input type="text" id="signup-referral" placeholder="ex: SKA-2503-1234" class="parrain-input-field">
+        </div>
+        <button class="btn-full" onclick="handleSignUp()">Créer mon compte gratuit →</button>
+        <div id="signup-error" class="auth-error" style="display:none;"></div>
+    </div>
+    <div class="login-right">
+      <div class="login-right-content">
+        <div class="login-right-badge">✦ Déjà utilisé par des centaines de créateurs</div>
+        <h2 class="login-right-title">Créez votre site en<br><span>quelques minutes</span></h2>
+        <div class="login-features-list">
+          <div class="lf-item">
+            <span class="lf-icon">⚡</span>
+            <div><strong>Drag & Drop intuitif</strong><p>Interface visuelle, aucun code requis</p></div>
+          </div>
+          <div class="lf-item">
+            <span class="lf-icon">🎨</span>
+            <div><strong>Templates professionnels</strong><p>Designs modernes prêts à personnaliser</p></div>
+          </div>
+          <div class="lf-item">
+            <span class="lf-icon">🚀</span>
+            <div><strong>Publication instantanée</strong><p>En ligne en 30 secondes sur Vercel</p></div>
+          </div>
+        </div>
+        <div class="login-right-testimonial">
+          <p>"En 10 minutes j'avais mon portfolio en ligne. C'est exactement ce qu'il me fallait."</p>
+          <span>— Skander H., développeur web</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE DASHBOARD ===== -->
+<div class="page" id="page-dashboard">
+
+  <!-- Hero banner -->
+  <div class="dash-hero">
+    <div class="dh-content">
+      <div class="dh-badge">✦ WebCraft Studio</div>
+      <h1 id="dash-greeting">Bonjour 👋</h1>
+      <p id="dash-subtitle">Créez des sites web magnifiques sans écrire une ligne de code.</p>
+      <div class="dh-actions">
+        <button class="dh-cta" onclick="goPage('templates')">+ Nouveau site</button>
+        <button class="dh-sec" onclick="goPage('editor')">Ouvrir l'éditeur</button>
+      </div>
+    </div>
+    <div class="dh-visual">
+      <div class="dh-browser">
+        <div class="dhb-bar">
+          <span class="dhb-dot" style="background:#FF5F57"></span>
+          <span class="dhb-dot" style="background:#FFBD2E"></span>
+          <span class="dhb-dot" style="background:#28C840"></span>
+          <div class="dhb-url">webcraft.io/mon-site</div>
+        </div>
+        <div class="dhb-nav"><div class="dhb-logo"></div><div class="dhb-links"><div></div><div></div><div></div></div></div>
+        <div class="dhb-hero" style="background:var(--teal-l)">
+          <div class="dhb-h1"></div><div class="dhb-h2"></div>
+          <div class="dhb-btn"></div>
+        </div>
+        <div class="dhb-cards">
+          <div style="background:var(--coral-l)"></div>
+          <div style="background:var(--purple-l)"></div>
+          <div style="background:var(--amber-l)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="dash-stats" id="dash-stats">
+    <div class="stat-card">
+      <div class="stat-ic teal-ic">⬡</div>
+      <div><div class="s-label">Sites créés</div><div class="s-val" id="stat-sites">0</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-ic purple-ic">⟳</div>
+      <div><div class="s-label">Dernière màj</div><div class="s-val small" id="stat-lastupdate">--</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-ic amber-ic">◈</div>
+      <div><div class="s-label">Code parrain</div><div class="s-val small" id="stat-referral">--</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-ic coral-ic">✦</div>
+      <div><div class="s-label">Membre depuis</div><div class="s-val small" id="stat-member-since">--</div></div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="dash-body">
+    <div class="dash-main">
+      <div class="section-header">
+        <h2 class="section-h2">Mes sites</h2>
+        <button class="btn-mini" onclick="goPage('templates')">+ Nouveau</button>
+      </div>
+      <div class="sites-grid" id="sites-grid">
+        <div class="new-site-card" onclick="goPage('templates')">
+          <span class="new-site-plus">+</span>
+          <span>Créer un nouveau site</span>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:2rem">
+        <h2 class="section-h2">Démarrer avec un template</h2>
+        <span class="see-all-link" onclick="goPage('templates')">Tous les templates →</span>
+      </div>
+      <div class="quick-tpl-row" id="quick-tpl-row"></div>
+    </div>
+
+    <div class="dash-sidebar">
+      <h2 class="section-h2">Activité récente</h2>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-dot" style="background:#1D9E75"></div>
+          <div><div class="activity-text">Site "Le Jardin" publié</div><div class="activity-time">Il y a 2h</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:#7F77DD"></div>
+          <div><div class="activity-text">Marie D. a rejoint via parrain</div><div class="activity-time">Il y a 1j</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:#BA7517"></div>
+          <div><div class="activity-text">Portfolio mis à jour · 3 blocs</div><div class="activity-time">Il y a 3j</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot" style="background:#D85A30"></div>
+          <div><div class="activity-text">Export ZIP téléchargé</div><div class="activity-time">Il y a 5j</div></div>
+        </div>
+      </div>
+      <div class="parrain-card">
+        <div class="parrain-header">
+          <span class="parrain-icon">◈</span>
+          <h3>Lien parrain</h3>
+        </div>
+        <p>Invitez un ami — Plan Pro à seulement <strong>4€ de plus</strong> sur votre abonnement.</p>
+        <input class="parrain-ref-input" id="referral-link" value="webcraft.io/ref/..." readonly>
+        <button class="parrain-share-btn" id="parrain-copy-btn" onclick="copyParrain()">Partager →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE PROFILE ===== -->
+<div class="page" id="page-profile">
+  <div class="profile-page">
+
+    <div class="profile-header">
+      <div class="profile-avatar" id="profile-avatar">?</div>
+      <div class="profile-header-info">
+        <h1 class="profile-name" id="profile-name">—</h1>
+        <div class="profile-email" id="profile-email">—</div>
+        <div class="profile-plan-badge" id="profile-plan-badge">Gratuit</div>
+      </div>
+    </div>
+
+    <div class="profile-cards">
+
+      <div class="profile-card">
+        <div class="profile-card-title">Informations du compte</div>
+        <div class="profile-field">
+          <span class="pf-label">Nom affiché</span>
+          <span class="pf-value" id="pf-name">—</span>
+        </div>
+        <div class="profile-field">
+          <span class="pf-label">Adresse email</span>
+          <span class="pf-value" id="pf-email">—</span>
+        </div>
+        <div class="profile-field">
+          <span class="pf-label">Membre depuis</span>
+          <span class="pf-value" id="pf-since">—</span>
+        </div>
+        <div class="profile-field">
+          <span class="pf-label">Identifiant</span>
+          <span class="pf-value pf-mono" id="pf-id">—</span>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-card-title">Plan actuel</div>
+        <div class="profile-plan-box" id="profile-plan-box">
+          <div class="ppb-icon">✦</div>
+          <div class="ppb-info">
+            <div class="ppb-name" id="ppb-name">Gratuit</div>
+            <div class="ppb-desc" id="ppb-desc">3 sites max · Export HTML/CSS · Hébergement Vercel</div>
+          </div>
+          <div class="ppb-badge" id="ppb-badge">Actif</div>
+        </div>
+        <button class="profile-upgrade-btn" onclick="goPage('landing')">Voir les offres →</button>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-card-title">Parrainage</div>
+        <div class="profile-field">
+          <span class="pf-label">Votre code</span>
+          <span class="pf-value pf-mono" id="pf-referral-code">—</span>
+        </div>
+        <div class="profile-field">
+          <span class="pf-label">Lien de parrainage</span>
+          <span class="pf-value pf-mono pf-small" id="pf-referral-link">—</span>
+        </div>
+        <button class="profile-copy-btn" id="pf-copy-btn" onclick="copyProfileReferral()">Copier le lien</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nom de site -->
+<div class="modal-bg" id="name-modal" style="display:none" onclick="if(event.target===this)closeNameModal()">
+  <div class="modal-box name-modal-box">
+    <div class="modal-title">Nommer votre site</div>
+    <div class="modal-sub">Vous pourrez changer ce nom à tout moment.</div>
+    <input class="name-modal-input" id="name-modal-input" type="text" placeholder="Ex: Mon Restaurant, Portfolio 2025..." maxlength="60" onkeydown="if(event.key==='Enter')confirmNameModal()">
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="closeNameModal()">Annuler</button>
+      <button class="modal-btn primary" onclick="confirmNameModal()">Créer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE TEMPLATES ===== -->
+<div class="page" id="page-templates">
+  <div class="tpl-header">
+    <h1>Choisir un template</h1>
+    <p>Commencez avec une base prête à personnaliser. Modifiez tout.</p>
+    <div class="tpl-filters">
+      <button class="filter-btn active" onclick="filterTpl('all',this)">Tous</button>
+      <button class="filter-btn" onclick="filterTpl('restaurant',this)">Restaurant</button>
+      <button class="filter-btn" onclick="filterTpl('portfolio',this)">Portfolio</button>
+      <button class="filter-btn" onclick="filterTpl('startup',this)">Startup</button>
+      <button class="filter-btn" onclick="filterTpl('blog',this)">Blog</button>
+      <button class="filter-btn" onclick="filterTpl('shop',this)">Boutique</button>
+      <button class="filter-btn" onclick="filterTpl('event',this)">Événement</button>
+    </div>
+  </div>
+  <div class="tpl-grid" id="tpl-grid">
+
+    <div class="tpl-card" data-cat="restaurant" onclick="goPage('editor')">
+      <div class="tpl-preview">
+        <iframe class="tpl-mini-frame" data-tpl="restaurant" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="tpl-overlay">
+        <button class="tpl-use-btn" onclick="event.stopPropagation();loadTemplate('restaurant')">Utiliser ce template</button>
+        <button class="tpl-preview-btn" onclick="event.stopPropagation();previewTemplate(this.closest('.tpl-card').dataset.cat)">Aperçu</button>
+      </div>
+      <div class="tpl-info">
+        <div class="tpl-name">Restaurant <span class="tpl-badge free">Gratuit</span></div>
+        <div class="tpl-cat">Idéal pour cafés, restaurants, bars</div>
+      </div>
+    </div>
+
+    <div class="tpl-card" data-cat="portfolio" onclick="goPage('editor')">
+      <div class="tpl-preview">
+        <iframe class="tpl-mini-frame" data-tpl="portfolio" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="tpl-overlay">
+        <button class="tpl-use-btn" onclick="event.stopPropagation();loadTemplate('portfolio')">Utiliser ce template</button>
+        <button class="tpl-preview-btn" onclick="event.stopPropagation();previewTemplate(this.closest('.tpl-card').dataset.cat)">Aperçu</button>
+      </div>
+      <div class="tpl-info">
+        <div class="tpl-name">Portfolio Créatif <span class="tpl-badge free">Gratuit</span></div>
+        <div class="tpl-cat">Développeurs, designers, freelances</div>
+      </div>
+    </div>
+
+    <div class="tpl-card" data-cat="startup" onclick="goPage('editor')">
+      <div class="tpl-preview">
+        <iframe class="tpl-mini-frame" data-tpl="startup" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="tpl-overlay">
+        <button class="tpl-use-btn" onclick="event.stopPropagation();loadTemplate('startup')">Utiliser ce template</button>
+        <button class="tpl-preview-btn" onclick="event.stopPropagation();previewTemplate(this.closest('.tpl-card').dataset.cat)">Aperçu</button>
+      </div>
+      <div class="tpl-info">
+        <div class="tpl-name">Startup SaaS <span class="tpl-badge pro">Pro</span></div>
+        <div class="tpl-cat">Produits tech, applications, SaaS</div>
+      </div>
+    </div>
+
+    <div class="tpl-card" data-cat="blog" onclick="goPage('editor')">
+      <div class="tpl-preview">
+        <iframe class="tpl-mini-frame" data-tpl="blog" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="tpl-overlay">
+        <button class="tpl-use-btn" onclick="event.stopPropagation();loadTemplate('blog')">Utiliser ce template</button>
+        <button class="tpl-preview-btn" onclick="event.stopPropagation();previewTemplate(this.closest('.tpl-card').dataset.cat)">Aperçu</button>
+      </div>
+      <div class="tpl-info">
+        <div class="tpl-name">Blog Editorial <span class="tpl-badge free">Gratuit</span></div>
+        <div class="tpl-cat">Journalistes, créateurs de contenu</div>
+      </div>
+    </div>
+
+    <div class="tpl-card" data-cat="shop" onclick="goPage('editor')">
+      <div class="tpl-preview">
+        <iframe class="tpl-mini-frame" data-tpl="shop" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="tpl-overlay">
+        <button class="tpl-use-btn" onclick="event.stopPropagation();loadTemplate('shop')">Utiliser ce template</button>
+        <button class="tpl-preview-btn" onclick="event.stopPropagation();previewTemplate(this.closest('.tpl-card').dataset.cat)">Aperçu</button>
+      </div>
+      <div class="tpl-info">
+        <div class="tpl-name">Boutique <span class="tpl-badge pro">Pro</span></div>
+        <div class="tpl-cat">E-commerce, artisans, créateurs</div>
+      </div>
+    </div>
+
+    <div class="tpl-card" data-cat="event" onclick="goPage('editor')">
+      <div class="tpl-preview">
+        <iframe class="tpl-mini-frame" data-tpl="event" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="tpl-overlay">
+        <button class="tpl-use-btn" onclick="event.stopPropagation();loadTemplate('event')">Utiliser ce template</button>
+        <button class="tpl-preview-btn" onclick="event.stopPropagation();previewTemplate(this.closest('.tpl-card').dataset.cat)">Aperçu</button>
+      </div>
+      <div class="tpl-info">
+        <div class="tpl-name">Événement <span class="tpl-badge pro">Pro</span></div>
+        <div class="tpl-cat">Conférences, meetups, concerts</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== PAGE EDITOR ===== -->
+<div class="page" id="page-editor">
+  <div class="editor-shell" id="editor-shell">
+    <div class="editor-topbar">
+      <button class="et-btn" onclick="goPage('dashboard')">← Dashboard</button>
+      <button class="et-btn" id="exit-arch-topbar-btn" onclick="exitArchitectMode()" style="display:none;background:rgba(249,115,22,.18);color:#f97316;border:1px solid rgba(249,115,22,.35);">✕ Quitter Architecte</button>
+      <div class="et-sep"></div>
+      <input class="et-title" id="site-title" value="Mon Restaurant" type="text">
+      <button class="et-btn" onclick="openPreview()" style="background: #06b6d4;">👁 Visualiser</button>
+      <button class="et-btn" id="save-btn" onclick="autoSaveCanvas()" style="background:rgba(34,197,94,.18);color:#16a34a;border:1px solid rgba(34,197,94,.35);">Enregistrer</button>
+      <div class="et-spacer"></div>
+      <div class="avatars-live">
+        <div class="av av-purple">S</div>
+        <div class="av av-teal">M</div>
+        <div class="live-badge"><div class="live-dot"></div>Live</div>
+      </div>
+      <div class="et-sep"></div>
+      <button class="et-btn" onclick="undo()">↶ Undo</button>
+      <button class="et-btn" onclick="redo()">↷ Redo</button>
+      <span class="et-saving" id="saving-indicator" style="display:none; color: var(--gray-m); font-size: 0.75rem; margin: 0 0.5rem;">💾 Sauvegarde...</span>
+      <button class="et-btn" onclick="clearCanvas()">🗑 Effacer</button>
+      <button class="et-btn" id="device-btn" onclick="toggleDevice()">📱 Mobile</button>
+      <button class="et-btn" onclick="showExport()">⬇ Exporter HTML</button>
+      <button class="et-btn pub" onclick="publishSite()">Publier ✦</button>
+    </div>
+
+    <!-- ═══ BARRE DE FORMATAGE TEXTE (Word-style) ═══ -->
+    <div class="text-toolbar" id="text-toolbar">
+      <div class="ttb-group">
+        <select id="pp-font-family" class="ttb-select" oninput="updateTextStyle('fontFamily',this.value)" title="Police">
+          <option value="">Police…</option>
+          <option value="DM Sans">DM Sans</option>
+          <option value="Syne">Syne</option>
+          <option value="Inter">Inter</option>
+          <option value="Roboto">Roboto</option>
+          <option value="Montserrat">Montserrat</option>
+          <option value="Poppins">Poppins</option>
+          <option value="Lato">Lato</option>
+          <option value="Open Sans">Open Sans</option>
+          <option value="Playfair Display">Playfair Display</option>
+          <option value="Merriweather">Merriweather</option>
+        </select>
+        <input type="number" id="pp-font-size" class="ttb-num" min="8" max="120" placeholder="Taille" oninput="updateTextStyle('fontSize',this.value)" title="Taille du texte">
+        <input type="color" id="pp-text-color" class="ttb-color" oninput="updateTextStyle('textColor',this.value)" title="Couleur du texte">
+      </div>
+      <div class="ttb-sep"></div>
+      <div class="ttb-group">
+        <button id="tbtn-bold"      class="ttb-btn" onclick="toggleTextStyle('fontWeight','bold','')"                        title="Gras (B)"><strong>B</strong></button>
+        <button id="tbtn-italic"    class="ttb-btn" onclick="toggleTextStyle('fontStyle','italic','')"                       title="Italique (I)"><em>I</em></button>
+        <button id="tbtn-underline" class="ttb-btn" onclick="toggleTextStyle('textDecoration','underline','')"               title="Souligné (U)"><u>U</u></button>
+        <button id="tbtn-strike"    class="ttb-btn" onclick="toggleTextStyle('textDecoration','line-through','')"            title="Barré"><s>S</s></button>
+        <button id="tbtn-shadow"    class="ttb-btn" onclick="toggleTextStyle('textShadow','2px 2px 4px rgba(0,0,0,0.3)','')" title="Ombre texte">T͟</button>
+      </div>
+      <div class="ttb-sep"></div>
+      <div class="ttb-group">
+        <button id="tbtn-align-left"    class="ttb-btn" onclick="setTextAlign('left')"    title="Aligner à gauche">&#8676;</button>
+        <button id="tbtn-align-center"  class="ttb-btn" onclick="setTextAlign('center')"  title="Centrer">&#8596;</button>
+        <button id="tbtn-align-right"   class="ttb-btn" onclick="setTextAlign('right')"   title="Aligner à droite">&#8677;</button>
+        <button id="tbtn-align-justify" class="ttb-btn" onclick="setTextAlign('justify')" title="Justifier">&#9776;</button>
+      </div>
+      <div class="ttb-sep"></div>
+      <div class="ttb-group">
+        <button id="tbtn-tt-none"       class="ttb-btn" onclick="updateTextStyle('textTransform','none')"       title="Casse normale">Aa</button>
+        <button id="tbtn-tt-uppercase"  class="ttb-btn" onclick="updateTextStyle('textTransform','uppercase')"  title="MAJUSCULES">AA</button>
+        <button id="tbtn-tt-lowercase"  class="ttb-btn" onclick="updateTextStyle('textTransform','lowercase')"  title="minuscules">aa</button>
+        <button id="tbtn-tt-capitalize" class="ttb-btn" onclick="updateTextStyle('textTransform','capitalize')" title="Chaque Mot">Aa̲</button>
+      </div>
+      <div class="ttb-sep"></div>
+      <div class="ttb-group">
+        <label class="ttb-label">Interl.</label>
+        <input type="number" id="pp-line-height" class="ttb-num" min="0.5" max="5" step="0.1" placeholder="auto" oninput="updateTextStyle('lineHeight',this.value)" title="Interligne">
+        <label class="ttb-label">Espac.</label>
+        <input type="number" id="pp-letter-spacing" class="ttb-num" min="-5" max="20" step="0.5" placeholder="0" oninput="updateTextStyle('letterSpacing',this.value)" title="Espacement des lettres (px)">
+      </div>
+      <div class="ttb-sep"></div>
+      <div class="ttb-group">
+        <label class="ttb-label" for="canvas-bg-picker">Fond page</label>
+        <input type="color" id="canvas-bg-picker" class="ttb-color" value="#ffffff" oninput="setCanvasBg(this.value)" title="Couleur de fond de la page">
+      </div>
+    </div>
+
+    <div class="editor-main" id="editor-main">
+      <div class="e-left">
+        <div class="e-panel-tabs">
+          <div class="e-ptab active" onclick="switchETab('blocs',this)">Blocs</div>
+          <div class="e-ptab" onclick="switchETab('animations',this)">Animations</div>
+          <div class="e-ptab" onclick="switchETab('pages',this)">Pages</div>
+        </div>
+        <div id="etab-blocs" class="blocks-list">
+
+          <div class="blocks-category">Structure</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('nav')"       ondragend="endDrag()"><span class="b-icon">▭</span>Navigation</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('hero')"      ondragend="endDrag()"><span class="b-icon">★</span>Héro</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('heading')"   ondragend="endDrag()"><span class="b-icon">H</span>Titre</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('section')"   ondragend="endDrag()"><span class="b-icon">⊞</span>Section 3 col.</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('footer')"    ondragend="endDrag()"><span class="b-icon">▁</span>Footer</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('banner')"    ondragend="endDrag()"><span class="b-icon">📢</span>Bannière</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('alert')"     ondragend="endDrag()"><span class="b-icon">⚠</span>Alerte</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('divider')"   ondragend="endDrag()"><span class="b-icon">—</span>Séparateur</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('spacer')"    ondragend="endDrag()"><span class="b-icon">↕</span>Espace vide</div>
+
+          <div class="blocks-category">Contenu</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('text')"      ondragend="endDrag()"><span class="b-icon">T</span>Texte</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('image')"     ondragend="endDrag()"><span class="b-icon">🖼</span>Image</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('gallery')"   ondragend="endDrag()"><span class="b-icon">⊟</span>Galerie</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('video')"     ondragend="endDrag()"><span class="b-icon">▶</span>Vidéo</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('quote')"     ondragend="endDrag()"><span class="b-icon">"</span>Citation</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('list')"      ondragend="endDrag()"><span class="b-icon">≡</span>Liste</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('table')"     ondragend="endDrag()"><span class="b-icon">⊞</span>Tableau</div>
+
+          <div class="blocks-category">Cartes & Grilles</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('card')"      ondragend="endDrag()"><span class="b-icon">▣</span>Carte</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('features')"  ondragend="endDrag()"><span class="b-icon">⚡</span>Fonctionnalités</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('pricing')"   ondragend="endDrag()"><span class="b-icon">💰</span>Tarification</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('team')"      ondragend="endDrag()"><span class="b-icon">👥</span>Équipe</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('steps')"     ondragend="endDrag()"><span class="b-icon">①</span>Étapes</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('logobar')"   ondragend="endDrag()"><span class="b-icon">◈</span>Logos partenaires</div>
+
+          <div class="blocks-category">Social & Preuve</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('testimonial')" ondragend="endDrag()"><span class="b-icon">💬</span>Témoignage</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('stats')"     ondragend="endDrag()"><span class="b-icon">📊</span>Statistiques</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('progress')"  ondragend="endDrag()"><span class="b-icon">▬</span>Progression</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('faq')"       ondragend="endDrag()"><span class="b-icon">?</span>FAQ</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('social')"    ondragend="endDrag()"><span class="b-icon">🔗</span>Réseaux sociaux</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('map')"       ondragend="endDrag()"><span class="b-icon">📍</span>Carte / Map</div>
+
+          <div class="blocks-category">Conversion</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('cta')"       ondragend="endDrag()"><span class="b-icon">◉</span>Bouton CTA</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('form')"      ondragend="endDrag()"><span class="b-icon">✉</span>Formulaire</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('newsletter')" ondragend="endDrag()"><span class="b-icon">📧</span>Newsletter</div>
+          <div class="b-thumb" draggable="true" ondragstart="startDrag('countdown')" ondragend="endDrag()"><span class="b-icon">⏱</span>Compte à rebours</div>
+
+        </div>
+        <div id="etab-animations" class="animations-list" style="display:none">
+          <button class="organize-anim-btn" onclick="toggleAnimationOrganizer()">⚙ Organiser les animations</button>
+          
+          <div id="anim-organizer" style="display:none;background:#f9f9f8;border:1px solid #e8e8e8;border-radius:6px;padding:0.8rem;margin-bottom:1rem;">
+            <div style="font-weight:600;font-size:0.8rem;margin-bottom:0.6rem;color:#1a1a1a;">Ordre des animations</div>
+            <div id="anim-timeline" style="display:flex;flex-direction:column;gap:0.5rem;"></div>
+          </div>
+          
+          <div class="anim-section">
+            <div class="anim-title">Animations disponibles</div>
+            <div class="anim-buttons">
+              <button class="anim-btn" onclick="applyAnimation('fadeIn')">👁 Apparition</button>
+              <button class="anim-btn" onclick="applyAnimation('slideInLeft')">➜ Glisser (gauche)</button>
+              <button class="anim-btn" onclick="applyAnimation('slideInRight')">⬅ Glisser (droite)</button>
+              <button class="anim-btn" onclick="applyAnimation('zoomIn')">🔍 Zoom</button>
+              <button class="anim-btn" onclick="applyAnimation('spin')">⟳ Rotation</button>
+              <button class="anim-btn" onclick="applyAnimation('bounce')">⛹ Rebond</button>
+            </div>
+            <div class="anim-controls" id="anim-controls" style="display:none;margin-top:1rem;">
+              <label>Durée (ms):</label>
+              <input type="number" id="anim-duration" value="600" min="100" max="5000" step="100">
+              <button class="anim-btn" onclick="updateAnimationPreview()">Aperçu</button>
+              <button class="anim-btn" onclick="removeAnimation()" style="background:#ef4444;">✕ Supprimer</button>
+            </div>
+          </div>
+        </div>
+        <div id="etab-pages" class="pages-list-container" style="display:none">
+          <button id="architect-btn" class="page-add-btn architect-toggle-btn" onclick="toggleArchitectMode()">🗺 Mode Architecte</button>
+          <div class="pages-list" id="pages-list"></div>
+          <button class="page-add-btn" onclick="addPage()">+ Ajouter une page</button>
+          <button class="page-add-btn" onclick="extendCanvasPage()" style="background: #06b6d4;">📄 Étendre la page</button>
+          <button class="page-add-btn" onclick="enterTrimMode(event)" style="background: #f97316;">✂ Découper</button>
+          <button class="page-add-btn" onclick="trimToLastElement()" style="background: #f97316;">✂ Découper au dernier élément</button>
+        </div>
+      </div>
+
+      <div class="e-canvas-wrap" id="canvas-wrap" ondragover="event.preventDefault()" ondrop="dropOnCanvas(event)">
+        <div class="e-canvas-inner" id="canvas" onclick="canvasClick(event)"></div>
+        
+        <!-- Trim mode indicators -->
+        <div id="trim-line" class="trim-line" style="display:none;"></div>
+        <div id="trim-scissors-left" class="trim-scissors" style="display:none;">✂</div>
+        <div id="trim-scissors-right" class="trim-scissors" style="display:none;">✂</div>
+        
+        <div class="canvas-bottom-actions">
+          <button class="canvas-action-btn" onclick="extendCanvasPage()">📄 Étendre</button>
+          <button class="canvas-action-btn" id="trim-btn" onclick="enterTrimMode(event)">✂ Découper</button>
+        </div>
+        <div class="modal-bg" id="export-modal" style="display:none">
+          <div class="modal-box">
+            <div class="modal-title">Exporter votre site</div>
+            <div class="modal-sub">Code sémantique, production-ready avec variables CSS.</div>
+            <div class="export-tabs">
+              <button class="exp-tab active" onclick="switchExpTab('html',this)">HTML</button>
+              <button class="exp-tab" onclick="switchExpTab('css',this)">CSS</button>
+            </div>
+            <div class="code-block" id="export-html-code"></div>
+            <div class="code-block" style="display:none;" id="export-css-code"></div>
+            <div class="modal-actions">
+              <button class="modal-btn" onclick="closeModal('export-modal')">Fermer</button>
+              <button class="modal-btn" onclick="copyActiveExport()">Copier</button>
+              <button class="modal-btn primary" onclick="showLivePreview()">👁 Aperçu</button>
+              <button class="modal-btn primary" onclick="downloadZip()">⬇ Télécharger .zip</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-bg" id="preview-modal" style="display:none">
+          <div class="modal-box preview-box">
+            <div class="modal-title">Aperçu en direct</div>
+            <div class="preview-controls">
+              <button class="preview-device-btn active" onclick="switchPreviewDevice('desktop',this)">🖥 Desktop</button>
+              <button class="preview-device-btn" onclick="switchPreviewDevice('mobile',this)">📱 Mobile</button>
+              <button class="modal-btn" onclick="closeModal('preview-modal')" style="margin-left:auto;">Fermer</button>
+            </div>
+            <div class="preview-frame-wrap" id="preview-frame-wrap">
+              <iframe id="preview-iframe" class="preview-iframe" sandbox="allow-same-origin"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="modal-bg" id="publish-modal" style="display:none">
+          <div class="modal-box">
+            <div class="pub-success">
+              <div class="pub-icon">✓</div>
+              <div class="modal-title">Site publié !</div>
+              <div class="modal-sub">Votre site est maintenant accessible en ligne.</div>
+              <div class="pub-url" id="pub-url"></div>
+              <div class="modal-actions" style="justify-content:center">
+                <button class="modal-btn" onclick="closeModal('publish-modal')">Fermer</button>
+                <button class="modal-btn primary" id="pub-open-btn">Voir en ligne →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="e-right" id="e-right">
+        <div class="no-sel" id="no-sel-msg">Cliquez sur un élément du canvas pour modifier ses propriétés.<br><br>Ou glissez un bloc depuis le panneau gauche.</div>
+
+        <!-- Panel multi-sélection -->
+        <div id="multi-sel-panel" style="display:none">
+          <div class="prop-sec">
+            <div class="prop-sec-title" style="color:var(--teal)" id="multi-sel-count">0 éléments sélectionnés</div>
+          </div>
+          <div class="prop-sec">
+            <div class="prop-sec-title">Couleur de fond</div>
+            <div class="prop-row">
+              <div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;">
+                <input type="color" id="mpp-bg" oninput="setElBg(this.value,null)" style="width:40px;height:32px;border:1px solid #ddd;border-radius:5px;cursor:pointer;">
+                <div class="swatch-row">
+                  <div class="sw" style="background:#E1F5EE" onclick="setElBg('#E1F5EE',this)"></div>
+                  <div class="sw" style="background:#FAECE7" onclick="setElBg('#FAECE7',this)"></div>
+                  <div class="sw" style="background:#EEEDFE" onclick="setElBg('#EEEDFE',this)"></div>
+                  <div class="sw" style="background:#FAEEDA" onclick="setElBg('#FAEEDA',this)"></div>
+                  <div class="sw" style="background:#1a1a1a" onclick="setElBg('#1a1a1a',this)"></div>
+                  <div class="sw sw-white" onclick="setElBg('#ffffff',this)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="prop-sec">
+            <div class="prop-sec-title">Espacement intérieur</div>
+            <div class="prop-row spacing-row">
+              <div class="spacing-grid">
+                <div><label style="font-size:.62rem;">Top</label><input type="number" id="mpp-pt" min="0" max="200" oninput="setGroupPadding('top',this.value)"></div>
+                <div><label style="font-size:.62rem;">Right</label><input type="number" id="mpp-pr" min="0" max="200" oninput="setGroupPadding('right',this.value)"></div>
+                <div><label style="font-size:.62rem;">Bottom</label><input type="number" id="mpp-pb" min="0" max="200" oninput="setGroupPadding('bottom',this.value)"></div>
+                <div><label style="font-size:.62rem;">Left</label><input type="number" id="mpp-pl" min="0" max="200" oninput="setGroupPadding('left',this.value)"></div>
+              </div>
+            </div>
+          </div>
+          <div class="prop-sec">
+            <div class="prop-sec-title">Aligner</div>
+            <div class="align-btns">
+              <button class="align-btn" onclick="alignGroup('left')"     title="Aligner à gauche">← Gauche</button>
+              <button class="align-btn" onclick="alignGroup('center-h')" title="Centrer H">↔ Centre H</button>
+              <button class="align-btn" onclick="alignGroup('right')"    title="Aligner à droite">Droite →</button>
+              <button class="align-btn" onclick="alignGroup('top')"      title="Aligner en haut">↑ Haut</button>
+              <button class="align-btn" onclick="alignGroup('center-v')" title="Centrer V">↕ Centre V</button>
+              <button class="align-btn" onclick="alignGroup('bottom')"   title="Aligner en bas">Bas ↓</button>
+            </div>
+            <div class="align-btns" style="margin-top:.4rem">
+              <button class="align-btn align-btn--wide" onclick="distributeGroup('h')">⊢ Distribuer H</button>
+              <button class="align-btn align-btn--wide" onclick="distributeGroup('v')">⊦ Distribuer V</button>
+            </div>
+          </div>
+          <div class="prop-sec">
+            <button onclick="delGroupEls()" style="width:100%;padding:.5rem;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:5px;cursor:pointer;font-size:.75rem;font-weight:600;">🗑 Supprimer la sélection</button>
+          </div>
+        </div>
+
+        <div id="props-panel" style="display:none">
+          <div class="prop-sec">
+            <div class="prop-sec-title">Élément</div>
+            <div class="prop-row"><label>Type</label><input type="text" id="pp-type" readonly></div>
+            <div class="prop-row pp-text-row">
+              <label>Contenu</label>
+              <textarea id="pp-text" rows="3" oninput="updateElText(this.value)" placeholder="Texte..."></textarea>
+              <div id="pp-text-hint" class="pp-hint"></div>
+            </div>
+            <div id="pp-block-fields"></div>
+          </div>
+          <div class="prop-sec">
+            <div class="prop-sec-title">Style</div>
+            <div class="prop-row">
+              <label>Couleur de fond</label>
+              <div style="display:flex;gap:.4rem;align-items:center;">
+                <input type="color" id="pp-color" oninput="setElColor(this.value)" style="width:40px;height:32px;border:1px solid #ddd;border-radius:5px;cursor:pointer;">
+                <div class="swatch-row">
+                  <div class="sw" style="background:#E1F5EE" onclick="setElBg('#E1F5EE',this)"></div>
+                  <div class="sw" style="background:#FAECE7" onclick="setElBg('#FAECE7',this)"></div>
+                  <div class="sw" style="background:#EEEDFE" onclick="setElBg('#EEEDFE',this)"></div>
+                  <div class="sw" style="background:#FAEEDA" onclick="setElBg('#FAEEDA',this)"></div>
+                  <div class="sw" style="background:#1a1a1a" onclick="setElBg('#1a1a1a',this)"></div>
+                  <div class="sw sw-white" onclick="setElBg('#ffffff',this)"></div>
+                </div>
+              </div>
+            </div>
+            <div class="prop-row spacing-row">
+              <label>Espacement intérieur</label>
+              <div class="spacing-grid">
+                <div>
+                  <label style="font-size:.62rem;">Top</label>
+                  <input type="number" id="pp-pt" min="0" max="100" oninput="updatePadding('top',this.value)">
+                </div>
+                <div>
+                  <label style="font-size:.62rem;">Right</label>
+                  <input type="number" id="pp-pr" min="0" max="100" oninput="updatePadding('right',this.value)">
+                </div>
+                <div>
+                  <label style="font-size:.62rem;">Bottom</label>
+                  <input type="number" id="pp-pb" min="0" max="100" oninput="updatePadding('bottom',this.value)">
+                </div>
+                <div>
+                  <label style="font-size:.62rem;">Left</label>
+                  <input type="number" id="pp-pl" min="0" max="100" oninput="updatePadding('left',this.value)">
+                </div>
+              </div>
+            </div>
+            <div class="prop-row spacing-row">
+              <label>Espacement extérieur</label>
+              <div class="spacing-grid">
+                <div>
+                  <label style="font-size:.62rem;">Top</label>
+                  <input type="number" id="pp-mt" min="0" max="100" oninput="updateMargin('top',this.value)">
+                </div>
+                <div>
+                  <label style="font-size:.62rem;">Right</label>
+                  <input type="number" id="pp-mr" min="0" max="100" oninput="updateMargin('right',this.value)">
+                </div>
+                <div>
+                  <label style="font-size:.62rem;">Bottom</label>
+                  <input type="number" id="pp-mb" min="0" max="100" oninput="updateMargin('bottom',this.value)">
+                </div>
+                <div>
+                  <label style="font-size:.62rem;">Left</label>
+                  <input type="number" id="pp-ml" min="0" max="100" oninput="updateMargin('left',this.value)">
+                </div>
+              </div>
+            </div>
+            <div class="prop-row pos-row">
+              <div>
+                <label>Position X</label>
+                <input type="number" id="pp-x" oninput="updateElPos('x',this.value)">
+              </div>
+              <div>
+                <label>Y</label>
+                <input type="number" id="pp-y" oninput="updateElPos('y',this.value)">
+              </div>
+            </div>
+            <div class="prop-row zindex-row">
+              <label>Ordre de profondeur</label>
+              <div class="zindex-btns">
+                <button class="zindex-btn" onclick="bringForward()" title="Bring forward">↑ Avant</button>
+                <button class="zindex-btn" onclick="sendBackward()" title="Send backward">↓ Arrière</button>
+              </div>
+            </div>
+          </div>
+          <div class="prop-sec">
+            <div class="prop-sec-title">Code généré</div>
+            <div class="export-box"><pre id="pp-code"></pre></div>
+            <button class="export-copy-btn" id="el-copy-btn" onclick="copyElCode()">Copier le HTML de cet élément</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-bar" id="ai-bar">
+      <div class="ai-bar-label">✦ IA</div>
+      <input class="ai-bar-input" id="ai-input" placeholder="Ex: Génère une section à propos pour un restaurant japonais..." onkeydown="if(event.key==='Enter')triggerAI()">
+      <button class="ai-bar-btn" onclick="triggerAI()">Générer →</button>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         MODE ARCHITECTE — vue plein-éditeur
+    ══════════════════════════════════════════ -->
+    <div id="architect-view" style="display:none; flex:1; overflow:hidden; flex-direction:column;">
+
+      <!-- Barre supérieure du mode architecte -->
+      <div class="arch-topbar">
+        <span class="arch-topbar-title">🗺 Mode Architecte</span>
+        <span class="arch-topbar-hint">Glissez les cartes · Cliquez <strong>🔗 Liens</strong> pour gérer · Cliquez une flèche pour voir les connexions</span>
+      </div>
+
+      <!-- Corps : zone scrollable + panneau de détail -->
+      <div class="arch-body">
+
+      <!-- Zone scrollable : le grand canvas libre -->
+      <div id="arch-cards-wrap">
+        <div id="arch-canvas">
+          <!-- SVG flèches (suit le scroll avec les cartes) -->
+          <svg id="arch-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:5;">
+            <defs>
+              <marker id="arch-arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <path d="M0,0 L9,3.5 L0,7 Z" fill="#06b6d4"/>
+              </marker>
+              <marker id="arch-arrowhead-left" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto">
+                <path d="M9,0 L0,3.5 L9,7 Z" fill="#06b6d4"/>
+              </marker>
+              <marker id="arch-arrowhead-sel" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <path d="M0,0 L9,3.5 L0,7 Z" fill="#f97316"/>
+              </marker>
+              <marker id="arch-arrowhead-left-sel" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto">
+                <path d="M9,0 L0,3.5 L9,7 Z" fill="#f97316"/>
+              </marker>
+            </defs>
+          </svg>
+          <!-- Cartes positionnées en absolu, déplaçables -->
+        </div>
+      </div>
+
+      <!-- Panneau de détail (droite) -->
+      <div id="arch-detail">
+        <div class="arch-det-empty">
+          <div style="font-size:2rem;margin-bottom:.6rem;">🗺</div>
+          Cliquez sur une flèche pour voir les liens actifs, ou sur <strong>🔗 Liens</strong> pour en ajouter.
+        </div>
+      </div>
+
+      </div><!-- /.arch-body -->
+
+      <!-- Overlay d'édition des liens d'une page (affiché par-dessus) -->
+      <div id="arch-edit-overlay" style="display:none; position:absolute; inset:0; z-index:40; background:#f5f5f4; flex-direction:column;">
+        <!-- Contenu rendu dynamiquement par renderArchitectMap / archEditPageLinks -->
+      </div>
+    </div>
+
+    <!-- Dialog : assigner un lien à un élément -->
+    <div id="arch-link-modal" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.45); align-items:center; justify-content:center;">
+      <div class="arch-modal-box">
+        <div class="arch-modal-title">🔗 Définir le lien de l'élément</div>
+        <label class="arch-modal-label">Lien vers une page du site</label>
+        <select id="arch-link-page-sel" class="arch-modal-select"></select>
+        <div class="arch-modal-sep">— ou —</div>
+        <label class="arch-modal-label">URL externe (ex : https://…)</label>
+        <input type="url" id="arch-link-url-inp" class="arch-modal-input" placeholder="https://exemple.com">
+        <div class="arch-modal-note">Laisser tout vide pour supprimer le lien.</div>
+        <div class="arch-modal-actions">
+          <button class="arch-modal-cancel" onclick="archCloseLinkDialog()">Annuler</button>
+          <button class="arch-modal-ok" onclick="archConfirmLink()">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE PREVIEW ===== -->
+<div class="page" id="page-preview" style="display:none;">
+  <div class="preview-shell">
+    <button class="preview-close" onclick="closePreview()">← Retour</button>
+    <div class="device-switcher">
+      <button class="dev-btn" id="prev-btn-mobile" onclick="switchPreviewTo('mobile')">📱 Mobile</button>
+      <button class="dev-btn" id="prev-btn-pc" onclick="switchPreviewTo('pc')">🖥 PC</button>
+    </div>
+    <div class="preview-container" id="preview-container"></div>
+  </div>
+</div>
+
+<!-- Generic confirm modal -->
+<div class="modal-bg" id="generic-confirm-modal" style="display:none" onclick="if(event.target===this)_genericConfirmCancel()">
+  <div class="modal-box" style="max-width:400px">
+    <div class="modal-title" id="gc-title">Confirmation</div>
+    <div class="modal-sub" id="gc-msg"></div>
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="_genericConfirmCancel()">Annuler</button>
+      <button class="modal-btn primary" onclick="_genericConfirmOk()">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Generic prompt modal -->
+<div class="modal-bg" id="generic-prompt-modal" style="display:none" onclick="if(event.target===this)_genericPromptCancel()">
+  <div class="modal-box" style="max-width:400px">
+    <div class="modal-title" id="gp-title">Saisie</div>
+    <div class="modal-sub" id="gp-msg"></div>
+    <input class="name-modal-input" id="gp-input" type="text" onkeydown="if(event.key==='Enter')_genericPromptOk()">
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="_genericPromptCancel()">Annuler</button>
+      <button class="modal-btn primary" onclick="_genericPromptOk()">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+/* ===== WEBCRAFT — nav.css ===== */
+
+.app-nav {
+  background: #151515;
+  padding: .7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: 46px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.app-logo {
+  font-family: var(--font);
+  font-weight: 800;
+  color: #f0eeea;
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: -0.01em;
+}
+.app-logo span { color: var(--coral-m); }
+.app-nav-links { display: flex; gap: .25rem; align-items: center; }
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: rgba(240,238,234,0.42);
+  padding: .38rem .8rem;
+  border-radius: 6px;
+  font-size: .8rem;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--body);
+}
+.nav-btn:hover  { color: #f0eeea; background: rgba(255,255,255,.07); }
+.nav-btn.active { color: #f0eeea; background: rgba(255,255,255,.11); }
+.nav-btn.cta {
+  background: var(--coral);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(216,90,48,.25);
+}
+.nav-btn.cta:hover {
+  background: #c24e26;
+  box-shadow: 0 4px 16px rgba(216,90,48,.4);
+  transform: translateY(-1px);
+}
