@@ -1,8 +1,8 @@
 /* ============ WEBCRAFT — editor.js ============ */
 
 import { state } from './store.js';
-import { elDefs, defaultTexts, templates } from './defs.js';
-import { renderEl, renderCanvas, renderLayers, saveState, updateHistoryUI, addEl, applyCanvasBg } from './canvas.js';
+import { templates } from './defs.js';
+import { renderCanvas, renderLayers, saveState, updateHistoryUI, addEl, applyCanvasBg } from './canvas.js';
 import { goPage } from './navigation.js';
 import { showConfirm, showPrompt } from './ui.js';
 
@@ -37,23 +37,9 @@ function _applyTemplate(templateKey) {
   var canvas = document.getElementById('canvas');
   if (canvas) canvas.innerHTML = '';
 
+  // Use addEl so all blocks decompose into independent elements
   templates[templateKey].blocks.forEach(function(block) {
-    var id = 'el-' + (++state.elCounter);
-    var def = elDefs[block.type];
-    var data = {
-      id, type: block.type, label: def.label,
-      x: Math.round(block.x / 10) * 10,
-      y: Math.round(block.y / 10) * 10,
-      w: def.w, h: def.h,
-      bg: block.bg || def.bg,
-      text: block.text || defaultTexts[block.type] || '',
-      zIndex: Object.keys(state.els).length,
-      paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0,
-      marginTop: 0, marginRight: 0, marginBottom: 0, marginLeft: 0,
-      imageData: null, color: '#1a1a1a'
-    };
-    state.els[id] = data;
-    renderEl(data);
+    addEl(block.type, block.x, block.y, block.text, block.bg);
   });
 
   document.getElementById('no-sel-msg').style.display = 'block';

@@ -9,136 +9,219 @@ import { updatePosFields, updateCodePreview, updateSwatches, applyTextStyles, po
 var _blockDecompose = {
   hero: function(x, y, d) {
     var f = (d && d.fields) || {};
+    var title = f.title || (d && d.text) || 'Bienvenue sur mon site';
+    var subtitle = f.subtitle || 'Décrivez votre activité en quelques mots accrocheurs.';
+    var btn = f.buttonText || 'Découvrir →';
     return [
-      { type: 'heading', x: x, y: y,       fields: { title: f.title || 'Bienvenue sur mon site' }, bg: '#E1F5EE', fullWidth: true },
-      { type: 'text',    x: x, y: y+70,    fields: { title: '', body: f.subtitle || 'Décrivez votre activité en quelques mots accrocheurs.' }, bg: '#E1F5EE', fullWidth: true },
-      { type: 'cta',     x: x, y: y+170,   fields: { title: '', buttonText: f.buttonText || 'Découvrir →' }, bg: '#E1F5EE', fullWidth: true }
+      { type: 'heading', x: x, y: y,       fields: { title: title }, fullWidth: true },
+      { type: 'text',    x: x, y: y+70,    fields: { title: '', body: subtitle }, fullWidth: true },
+      { type: 'cta',     x: x, y: y+170,   fields: { title: '', buttonText: btn }, fullWidth: true }
     ];
   },
   features: function(x, y, d) {
-    var items = (d && d.items) || [
-      {icon:'⚡',title:'Rapide',description:'Description courte.'},
-      {icon:'🔒',title:'Sécurisé',description:'Description courte.'},
-      {icon:'🎯',title:'Précis',description:'Description courte.'},
-      {icon:'💡',title:'Intuitif',description:'Description courte.'}
-    ];
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(item) {
+        var si = item.search(/\s/);
+        return { icon: si > -1 ? item.slice(0, si) : item, title: si > -1 ? item.slice(si+1).trim() : '', description: 'Description courte.' };
+      });
+    } else {
+      items = [{icon:'⚡',title:'Rapide',description:'Description courte.'},{icon:'🔒',title:'Sécurisé',description:'Description courte.'},{icon:'🎯',title:'Précis',description:'Description courte.'},{icon:'💡',title:'Intuitif',description:'Description courte.'}];
+    }
     var gap = 230;
     return items.map(function(item, i) {
-      return { type: 'feature_item', x: x + i * gap, y: y, fields: { icon: item.icon||'⭐', title: item.title||'Feature', description: item.description||'Description.' }, bg: '#f5f5f4' };
+      return { type: 'feature_item', x: x + i * gap, y: y, fields: { icon: item.icon||'⭐', title: item.title||'Feature', description: item.description||'Description.' } };
     });
   },
   team: function(x, y, d) {
-    var items = (d && d.items) || [
-      {name:'Jean',role:'CEO'},{name:'Marie',role:'Design'},{name:'Paul',role:'Dev'},{name:'Sofia',role:'Marketing'}
-    ];
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(item) {
+        var di = item.indexOf('·');
+        return { name: di > -1 ? item.slice(0, di).trim() : item.trim(), role: di > -1 ? item.slice(di+1).trim() : '' };
+      });
+    } else {
+      items = [{name:'Jean',role:'CEO'},{name:'Marie',role:'Design'},{name:'Paul',role:'Dev'},{name:'Sofia',role:'Marketing'}];
+    }
     var gap = 230;
     return items.map(function(item, i) {
-      return { type: 'team_member', x: x + i * gap, y: y, fields: { name: item.name||'Nom', role: item.role||'Rôle' }, bg: '#f5f5f4' };
+      return { type: 'team_member', x: x + i * gap, y: y, fields: { name: item.name||'Nom', role: item.role||'Rôle' } };
     });
   },
   stats: function(x, y, d) {
-    var items = (d && d.items) || [
-      {number:'99',label:'Clients'},{number:'500',label:'Projets'},{number:'10K',label:'Users'}
-    ];
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(item) {
+        var si = item.indexOf(' ');
+        return { number: si > -1 ? item.slice(0, si).trim() : item.trim(), label: si > -1 ? item.slice(si+1).trim() : '' };
+      });
+    } else {
+      items = [{number:'99',label:'Clients'},{number:'500',label:'Projets'},{number:'10K',label:'Users'}];
+    }
     var gap = 310;
     return items.map(function(item, i) {
-      return { type: 'stat_item', x: x + i * gap, y: y, fields: { number: item.number||'0', label: item.label||'Stat' }, bg: '#E1F5EE' };
+      return { type: 'stat_item', x: x + i * gap, y: y, fields: { number: item.number||'0', label: item.label||'Stat' } };
     });
   },
   steps: function(x, y, d) {
-    var items = (d && d.items) || [
-      {title:'Créer',description:'Créez votre compte'},{title:'Configurer',description:'Personnalisez'},{title:'Lancer',description:'Publiez'}
-    ];
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(item) {
+        var di = item.indexOf('·');
+        return { title: di > -1 ? item.slice(0, di).trim() : item.trim(), description: di > -1 ? item.slice(di+1).trim() : '' };
+      });
+    } else {
+      items = [{title:'Créer',description:'Créez votre compte'},{title:'Configurer',description:'Personnalisez'},{title:'Lancer',description:'Publiez'}];
+    }
     var gap = 310;
     return items.map(function(item, i) {
-      return { type: 'step_item', x: x + i * gap, y: y, fields: { num: String(i+1), title: item.title||'Étape', description: item.description||'' }, bg: '#EEEDFE' };
+      return { type: 'step_item', x: x + i * gap, y: y, fields: { num: String(i+1), title: item.title||'Étape', description: item.description||'' } };
     });
   },
   progress: function(x, y, d) {
-    var items = (d && d.items) || [
-      {label:'Design',value:'90'},{label:'Développement',value:'75'},{label:'Marketing',value:'60'}
-    ];
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(item) {
+        var si = item.lastIndexOf(' ');
+        return { label: si > -1 ? item.slice(0, si).trim() : item.trim(), value: si > -1 ? item.slice(si+1).trim() : '50' };
+      });
+    } else {
+      items = [{label:'Design',value:'90'},{label:'Développement',value:'75'},{label:'Marketing',value:'60'}];
+    }
     return items.map(function(item, i) {
-      return { type: 'progress_item', x: x, y: y + i * 60, fields: { label: item.label||'Compétence', value: item.value||'50' }, bg: '#EEEDFE', fullWidth: true };
+      return { type: 'progress_item', x: x, y: y + i * 60, fields: { label: item.label||'Compétence', value: item.value||'50' }, fullWidth: true };
     });
   },
   faq: function(x, y, d) {
-    var items = (d && d.items) || [
-      {question:'Comment ça fonctionne ?',answer:''},
-      {question:'Quel est le prix ?',answer:''},
-      {question:'Essai gratuit ?',answer:''},
-      {question:'Support ?',answer:''}
-    ];
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(q) { return { question: q.trim(), answer: '' }; });
+    } else {
+      items = [{question:'Comment ça fonctionne ?',answer:''},{question:'Quel est le prix ?',answer:''},{question:'Essai gratuit ?',answer:''},{question:'Support ?',answer:''}];
+    }
     return items.map(function(item, i) {
-      return { type: 'faq_item', x: x, y: y + i * 60, fields: { question: item.question||'Question ?', answer: item.answer||'' }, bg: '#f5f5f4', fullWidth: true };
+      return { type: 'faq_item', x: x, y: y + i * 60, fields: { question: item.question||'Question ?', answer: item.answer||'' }, fullWidth: true };
     });
   },
   gallery: function(x, y, d) {
-    var items = (d && d.items) || [{},{},{},{},{},{}];
-    var cols = 3;
-    var gw = 290, gh = 200, gap = 10;
+    var items = (d && d.items && d.items.length) ? d.items : [{},{},{},{},{},{}];
+    var cols = 3, gw = 290, gh = 200, gap = 10;
     return items.map(function(item, i) {
-      var col = i % cols;
-      var row = Math.floor(i / cols);
-      return { type: 'gallery_item', x: x + col * (gw + gap), y: y + row * (gh + gap), bg: '#f5f5f4' };
+      var col = i % cols, row = Math.floor(i / cols);
+      return { type: 'gallery_item', x: x + col * (gw + gap), y: y + row * (gh + gap) };
     });
   },
   section: function(x, y, d) {
-    var items = (d && d.items) || [{text:'Colonne 1'},{text:'Colonne 2'},{text:'Colonne 3'}];
-    var colW = Math.floor(880 / items.length);
-    var gap = 10;
+    var items;
+    if (d && d.items && d.items.length) {
+      items = d.items;
+    } else if (d && d.text) {
+      items = d.text.split('|').map(function(t) { return { text: t.trim() }; });
+    } else {
+      items = [{text:'Colonne 1'},{text:'Colonne 2'},{text:'Colonne 3'}];
+    }
+    var colW = Math.floor(880 / items.length), gap = 10;
     return items.map(function(item, i) {
-      return { type: 'section_col', x: x + i * (colW + gap), y: y, fields: { text: item.text||'Colonne' }, bg: '#f5f5f4' };
+      return { type: 'section_col', x: x + i * (colW + gap), y: y, fields: { text: item.text||'Colonne' } };
     });
   },
   list: function(x, y, d) {
     var f = (d && d.fields) || {};
-    var items = (d && d.items) || [{text:'Premier item'},{text:'Deuxième item'},{text:'Troisième item'}];
-    var result = [
-      { type: 'heading', x: x, y: y, fields: { title: f.title||'Points clés' }, bg: '#f5f5f4', fullWidth: true }
-    ];
+    var items, title;
+    if (d && d.items && d.items.length) {
+      items = d.items; title = f.title || 'Points clés';
+    } else if (d && d.text) {
+      var parts = d.text.split('|');
+      title = parts[0] || 'Points clés';
+      items = parts.slice(1).map(function(t) { return { text: t.trim() }; });
+      if (!items.length) items = [{text:'Premier item'},{text:'Deuxième item'},{text:'Troisième item'}];
+    } else {
+      title = f.title || 'Points clés';
+      items = [{text:'Premier item'},{text:'Deuxième item'},{text:'Troisième item'}];
+    }
+    var result = [{ type: 'heading', x: x, y: y, fields: { title: title }, fullWidth: true }];
     items.forEach(function(item, i) {
-      result.push({ type: 'list_item', x: x, y: y + 70 + i * 54, fields: { text: item.text||'Item' }, bg: '#f5f5f4', fullWidth: true });
+      result.push({ type: 'list_item', x: x, y: y + 70 + i * 54, fields: { text: item.text||'Item' }, fullWidth: true });
     });
     return result;
   },
   pricing: function(x, y, d) {
     var f = (d && d.fields) || {};
-    var items = (d && d.items) || [
+    var sectionTitle = f.sectionTitle || (d && d.text) || 'Tarification';
+    var items = (d && d.items && d.items.length) ? d.items : [
       {name:'Gratuit',price:'0€',period:'/mois',features:'✓ Feature 1\n✓ Feature 2',buttonText:'Commencer',featured:false},
       {name:'Pro',price:'29€',period:'/mois',features:'✓ Tout le Gratuit\n✓ Feature 3',buttonText:'Essayer',featured:true},
       {name:'Business',price:'99€',period:'/mois',features:'✓ Tout le Pro\n✓ Support',buttonText:'Contacter',featured:false}
     ];
-    var result = [
-      { type: 'heading', x: x, y: y, fields: { title: f.sectionTitle||'Tarification' }, bg: '#f5f5f4', fullWidth: true }
-    ];
+    var result = [{ type: 'heading', x: x, y: y, fields: { title: sectionTitle }, fullWidth: true }];
     var gap = 310;
     items.forEach(function(item, i) {
-      result.push({ type: 'pricing_plan', x: x + i * gap, y: y + 70, fields: { name: item.name, price: item.price, period: item.period, features: item.features, buttonText: item.buttonText, featured: item.featured }, bg: '#f5f5f4' });
+      result.push({ type: 'pricing_plan', x: x + i * gap, y: y + 70, fields: { name: item.name, price: item.price, period: item.period, features: item.features, buttonText: item.buttonText, featured: item.featured } });
     });
     return result;
   },
   logobar: function(x, y, d) {
     var f = (d && d.fields) || {};
-    var items = (d && d.items) || [{name:'Logo A'},{name:'Logo B'},{name:'Logo C'},{name:'Logo D'},{name:'Logo E'}];
-    var result = [
-      { type: 'heading', x: x, y: y, fields: { title: f.label||'Ils nous font confiance' }, bg: '#f5f5f4', fullWidth: true }
-    ];
+    var label = f.label || (d && d.text) || 'Ils nous font confiance';
+    var items = (d && d.items && d.items.length) ? d.items : [{name:'Logo A'},{name:'Logo B'},{name:'Logo C'},{name:'Logo D'},{name:'Logo E'}];
+    var result = [{ type: 'heading', x: x, y: y, fields: { title: label }, fullWidth: true }];
     var gap = 190;
     items.forEach(function(item, i) {
-      result.push({ type: 'logo_item', x: x + i * gap, y: y + 70, fields: { name: item.name||'Logo' }, bg: '#f5f5f4' });
+      result.push({ type: 'logo_item', x: x + i * gap, y: y + 70, fields: { name: item.name||'Logo' } });
     });
     return result;
   },
   newsletter: function(x, y, d) {
     var f = (d && d.fields) || {};
+    var title = f.title || (d && d.text) || 'Restez informé';
+    var body = f.body || 'Recevez les dernières actualités dans votre boîte mail.';
     return [
-      { type: 'heading',  x: x, y: y,      fields: { title: f.title||'Restez informé' }, bg: '#1a1a1a', fullWidth: true },
-      { type: 'text',     x: x, y: y+70,   fields: { title: '', body: f.body||'Recevez les dernières actualités dans votre boîte mail.' }, bg: '#1a1a1a', fullWidth: true },
-      { type: 'cta',      x: x, y: y+160,  fields: { title: '', buttonText: 'S\'inscrire' }, bg: '#1a1a1a', fullWidth: true }
+      { type: 'heading', x: x, y: y,     fields: { title: title }, fullWidth: true },
+      { type: 'text',    x: x, y: y+70,  fields: { title: '', body: body }, fullWidth: true },
+      { type: 'cta',     x: x, y: y+160, fields: { title: '', buttonText: 'S\'inscrire' }, fullWidth: true }
     ];
   },
-  testimonial: null // keep as single element
+  testimonial: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    var parts = (d && d.text && d.text.split('|')) || [];
+    var text = f.text || parts[0] || 'Super produit !';
+    var author = f.author || parts[1] || 'Jean Dupont';
+    return [
+      { type: 'text', x: x, y: y,    fields: { title: '"' + text + '"', body: '' }, w: 400, h: 80 },
+      { type: 'text', x: x, y: y+90, fields: { title: '— ' + author, body: '' }, w: 400, h: 44 }
+    ];
+  },
+  quote: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    var parts = (d && d.text && d.text.split('|')) || [];
+    var text = f.text || parts[0] || 'Une citation inspirante va ici.';
+    var author = f.author || parts[1] || 'Auteur';
+    return [
+      { type: 'text', x: x, y: y,    fields: { title: '"' + text + '"', body: '' }, w: 600, h: 80 },
+      { type: 'text', x: x, y: y+90, fields: { title: '— ' + author, body: '' }, w: 600, h: 44 }
+    ];
+  },
+  card: function(x, y, d) {
+    var f = (d && d.fields) || {};
+    var title = f.title || (d && d.text) || 'Titre';
+    var desc = f.description || 'Description courte';
+    return [
+      { type: 'heading', x: x, y: y,    fields: { title: title }, w: 200, h: 50 },
+      { type: 'text',    x: x, y: y+60, fields: { title: '', body: desc }, w: 200, h: 90 }
+    ];
+  }
 };
 
 export function setCanvasBg(color) {
@@ -161,41 +244,45 @@ export function applyCanvasBg() {
 export function initDefaultCanvas() {
   addEl('nav', 0, 0);
   addEl('hero', 0, 50);
-  addEl('text', 30, 210);
-  addEl('image', 450, 210);
-  addEl('cta', 0, 350);
-  addEl('footer', 0, 460);
+  addEl('text', 30, 330);
+  addEl('image', 450, 330);
+  addEl('cta', 0, 480);
+  addEl('footer', 0, 590);
   renderLayers();
   initMarqueeSelection();
 }
 
-export function addEl(type, x, y, text) {
+export function addEl(type, x, y, text, bgOverride) {
   var decompose = _blockDecompose[type];
   if (decompose) {
-    // Decompose block into independent elements
-    var atoms = decompose(Math.round(x / 10) * 10, Math.round(y / 10) * 10, null);
-    atoms.forEach(function(atom) { _createEl(atom.type, atom.x, atom.y, atom.fields, atom.bg, atom.fullWidth); });
+    var d = (text || bgOverride) ? { text: text || null } : null;
+    var atoms = decompose(Math.round(x / 10) * 10, Math.round(y / 10) * 10, d);
+    atoms.forEach(function(atom) {
+      _createEl(atom.type, atom.x, atom.y, atom.fields, bgOverride || atom.bg, atom.fullWidth, null, atom.w, atom.h);
+    });
     updateCanvasHeight();
     renderLayers();
     return;
   }
-  _createEl(type, x, y, null, null, false, text);
+  _createEl(type, x, y, null, bgOverride || null, false, text);
   updateCanvasHeight();
   renderLayers();
 }
 
-function _createEl(type, x, y, fields, bg, fullWidthOverride, text) {
+function _createEl(type, x, y, fields, bg, fullWidthOverride, text, wOverride, hOverride) {
   var id = 'el-' + (++state.elCounter);
   var def = elDefs[type];
   if (!def) return;
   var canvasW = state.mobileMode ? 375 : 900;
-  var useFullWidth = fullWidthOverride !== undefined ? fullWidthOverride : !!def.fullWidth;
+  var useFullWidth = (wOverride === undefined && fullWidthOverride !== undefined) ? fullWidthOverride : (wOverride === undefined ? !!def.fullWidth : false);
+  var w = wOverride !== undefined ? wOverride : (useFullWidth ? canvasW : def.w);
+  var h = hOverride !== undefined ? hOverride : def.h;
   var data = {
     id: id, type: type,
     label: def.label,
     x: Math.round(x / 10) * 10,
     y: Math.round(y / 10) * 10,
-    w: useFullWidth ? canvasW : def.w, h: def.h,
+    w: w, h: h,
     bg: bg || def.bg,
     text: text || defaultTexts[type] || '',
     zIndex: Object.keys(state.els).length,
@@ -204,9 +291,7 @@ function _createEl(type, x, y, fields, bg, fullWidthOverride, text) {
     imageData: null,
     color: '#1a1a1a'
   };
-  if (fields) {
-    data.fields = fields;
-  }
+  if (fields) data.fields = fields;
   state.els[id] = data;
   saveState();
   renderEl(data);

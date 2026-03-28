@@ -756,87 +756,93 @@ export var layerColors = {
 export var templates = {
   restaurant: {
     name: 'Restaurant',
+    // hero→260px, features→140px, section(3col)→140px, testimonial→140px
     blocks: [
       { type: 'nav',         x: 0,   y: 0,   text: 'Le Jardin|Accueil|Carte|Réservation|Réserver', bg: '#1a0800' },
       { type: 'banner',      x: 0,   y: 46,  text: '🍷 Happy Hour 18h-20h — 50% sur tous les vins !', bg: '#8B4513' },
       { type: 'hero',        x: 0,   y: 92,  text: 'Une Cuisine Authentique & Raffinée', bg: '#2d1400' },
-      { type: 'features',    x: 0,   y: 232, text: '🍽 Service|🥩 Produits frais|🍷 Cave à vins|⭐ Étoilé Michelin', bg: '#2d1a08' },
-      { type: 'section',     x: 0,   y: 392, text: '🥗 Entrées|🥩 Plats du jour|🍮 Desserts maison', bg: '#3d2010' },
-      { type: 'testimonial', x: 250, y: 592, text: 'Une expérience gastronomique exceptionnelle !|Sophie M., Paris', bg: '#BA7517' },
-      { type: 'cta',         x: 0,   y: 712, text: 'Réserver une table ce soir', bg: '#1a0800' },
-      { type: 'footer',      x: 0,   y: 802, text: 'Le Jardin', bg: '#1a0800' }
+      { type: 'features',    x: 0,   y: 360, text: '🍽 Service|🥩 Produits frais|🍷 Cave à vins|⭐ Étoilé Michelin', bg: '#2d1a08' },
+      { type: 'section',     x: 0,   y: 510, text: '🥗 Entrées|🥩 Plats du jour|🍮 Desserts maison', bg: '#3d2010' },
+      { type: 'testimonial', x: 250, y: 660, text: 'Une expérience gastronomique exceptionnelle !|Sophie M., Paris', bg: '#BA7517' },
+      { type: 'cta',         x: 0,   y: 810, text: 'Réserver une table ce soir', bg: '#1a0800' },
+      { type: 'footer',      x: 0,   y: 910, text: 'Le Jardin', bg: '#1a0800' }
     ]
   },
   portfolio: {
     name: 'Portfolio Créatif',
+    // hero→260px, stats→100px, steps→130px, card→150px
     blocks: [
       { type: 'nav',         x: 0,   y: 0,   text: 'Mon Portfolio|Projets|À propos|Blog|Me contacter', bg: '#ffffff' },
       { type: 'hero',        x: 0,   y: 46,  text: 'Designer & Developer Créatif', bg: '#f8f8f8' },
-      { type: 'stats',       x: 0,   y: 186, text: '42 Projets|18 Clients|5 Ans|100% Satisfaits', bg: '#E1F5EE' },
-      { type: 'steps',       x: 0,   y: 286, text: 'Découverte · On explore vos besoins|Conception · Je crée la maquette|Livraison · Code & mise en ligne', bg: '#EEEDFE' },
-      { type: 'heading',     x: 0,   y: 426, text: 'Projets récents', bg: '#7F77DD' },
-      { type: 'card',        x: 30,  y: 486, text: 'Projet Branding', bg: '#EEEDFE' },
-      { type: 'card',        x: 350, y: 486, text: 'App Mobile', bg: '#E1F5EE' },
-      { type: 'card',        x: 670, y: 486, text: 'Site E-commerce', bg: '#FAECE7' },
-      { type: 'cta',         x: 0,   y: 636, text: 'Discutons de votre projet', bg: '#D85A30' },
-      { type: 'footer',      x: 0,   y: 726, text: 'Portfolio', bg: '#1a1a1a' }
+      { type: 'stats',       x: 0,   y: 320, text: '42 Projets|18 Clients|5 Ans|100% Satisfaits', bg: '#E1F5EE' },
+      { type: 'steps',       x: 0,   y: 430, text: 'Découverte · On explore vos besoins|Conception · Je crée la maquette|Livraison · Code & mise en ligne', bg: '#EEEDFE' },
+      { type: 'heading',     x: 0,   y: 570, text: 'Projets récents', bg: '#7F77DD' },
+      { type: 'card',        x: 30,  y: 640, text: 'Projet Branding', bg: '#EEEDFE' },
+      { type: 'card',        x: 350, y: 640, text: 'App Mobile', bg: '#E1F5EE' },
+      { type: 'card',        x: 670, y: 640, text: 'Site E-commerce', bg: '#FAECE7' },
+      { type: 'cta',         x: 0,   y: 810, text: 'Discutons de votre projet', bg: '#D85A30' },
+      { type: 'footer',      x: 0,   y: 910, text: 'Portfolio', bg: '#1a1a1a' }
     ]
   },
   startup: {
     name: 'Startup SaaS',
+    // hero→260px, features→140px, stats→100px, pricing→310px
     blocks: [
-      { type: 'nav',      x: 0, y: 0,   text: 'AppName|Fonctionnalités|Tarifs|Blog|Essai gratuit', bg: '#0f0f1a' },
-      { type: 'banner',   x: 0, y: 46,  text: '🚀 Bêta ouverte — Accès gratuit pendant 30 jours !', bg: '#7F77DD' },
-      { type: 'hero',     x: 0, y: 92,  text: 'La Solution qui Transforme votre Business', bg: '#0f0f1a' },
-      { type: 'features', x: 0, y: 232, text: '⚡ Ultra-rapide|🔒 Sécurisé|🎯 Précis|💡 Intuitif', bg: '#1a1a2e' },
-      { type: 'stats',    x: 0, y: 392, text: '10K+ Clients|500M Requêtes|99.9% Uptime', bg: '#1D9E75' },
-      { type: 'pricing',  x: 0, y: 492, text: 'Nos offres', bg: '#0f0f1a' },
-      { type: 'cta',      x: 0, y: 722, text: 'Commencer gratuitement — 0€/mois', bg: '#7F77DD' },
-      { type: 'footer',   x: 0, y: 812, text: 'AppName', bg: '#0f0f1a' }
+      { type: 'nav',      x: 0, y: 0,    text: 'AppName|Fonctionnalités|Tarifs|Blog|Essai gratuit', bg: '#0f0f1a' },
+      { type: 'banner',   x: 0, y: 46,   text: '🚀 Bêta ouverte — Accès gratuit pendant 30 jours !', bg: '#7F77DD' },
+      { type: 'hero',     x: 0, y: 92,   text: 'La Solution qui Transforme votre Business', bg: '#0f0f1a' },
+      { type: 'features', x: 0, y: 360,  text: '⚡ Ultra-rapide|🔒 Sécurisé|🎯 Précis|💡 Intuitif', bg: '#1a1a2e' },
+      { type: 'stats',    x: 0, y: 510,  text: '10K+ Clients|500M Requêtes|99.9% Uptime', bg: '#1D9E75' },
+      { type: 'pricing',  x: 0, y: 620,  text: 'Nos offres', bg: '#0f0f1a' },
+      { type: 'cta',      x: 0, y: 940,  text: 'Commencer gratuitement — 0€/mois', bg: '#7F77DD' },
+      { type: 'footer',   x: 0, y: 1040, text: 'AppName', bg: '#0f0f1a' }
     ]
   },
   blog: {
     name: 'Blog Editorial',
+    // hero→260px, card→150px, quote→140px, newsletter→250px
     blocks: [
       { type: 'nav',        x: 0,   y: 0,   text: 'Mon Blog|Articles|Catégories|À propos|Newsletter', bg: '#1a1a1a' },
       { type: 'hero',       x: 0,   y: 46,  text: 'Histoires, Inspirations & Découvertes', bg: '#f5f5f4' },
-      { type: 'heading',    x: 0,   y: 186, text: 'Articles à la une', bg: '#7F77DD' },
-      { type: 'card',       x: 30,  y: 246, text: 'Design & UX', bg: '#EEEDFE' },
-      { type: 'card',       x: 350, y: 246, text: 'Développement', bg: '#E1F5EE' },
-      { type: 'card',       x: 670, y: 246, text: 'Tendances 2025', bg: '#FAECE7' },
-      { type: 'quote',      x: 150, y: 396, text: 'Écrire, c\'est dessiner avec des mots.|Victor Hugo', bg: '#EEEDFE' },
-      { type: 'newsletter', x: 0,   y: 516, text: 'Restez inspiré chaque semaine', bg: '#1a1a1a' },
-      { type: 'footer',     x: 0,   y: 636, text: 'Mon Blog', bg: '#1a1a1a' }
+      { type: 'heading',    x: 0,   y: 320, text: 'Articles à la une', bg: '#7F77DD' },
+      { type: 'card',       x: 30,  y: 390, text: 'Design & UX', bg: '#EEEDFE' },
+      { type: 'card',       x: 350, y: 390, text: 'Développement', bg: '#E1F5EE' },
+      { type: 'card',       x: 670, y: 390, text: 'Tendances 2025', bg: '#FAECE7' },
+      { type: 'quote',      x: 150, y: 560, text: 'Écrire, c\'est dessiner avec des mots.|Victor Hugo', bg: '#EEEDFE' },
+      { type: 'newsletter', x: 0,   y: 720, text: 'Restez inspiré chaque semaine', bg: '#1a1a1a' },
+      { type: 'footer',     x: 0,   y: 980, text: 'Mon Blog', bg: '#1a1a1a' }
     ]
   },
   shop: {
     name: 'Boutique',
+    // hero→260px, card→150px (2 rows), testimonial→140px
     blocks: [
       { type: 'nav',         x: 0,   y: 0,   text: 'Boutique|Nouveautés|Collections|Promotions|Panier', bg: '#1a1a1a' },
       { type: 'banner',      x: 0,   y: 46,  text: '🛍 Livraison offerte dès 50€ — Code : LIVRAISON50', bg: '#D85A30' },
       { type: 'hero',        x: 0,   y: 92,  text: 'Nouvelle Collection Printemps 2025', bg: '#f5f5f4' },
-      { type: 'card',        x: 30,  y: 232, text: 'Produit Vedette', bg: '#EEEDFE' },
-      { type: 'card',        x: 350, y: 232, text: 'Nouveauté', bg: '#E1F5EE' },
-      { type: 'card',        x: 670, y: 232, text: 'Best-seller', bg: '#FAECE7' },
-      { type: 'card',        x: 30,  y: 382, text: 'Édition limitée', bg: '#FAECE7' },
-      { type: 'card',        x: 350, y: 382, text: 'Collection été', bg: '#EEEDFE' },
-      { type: 'card',        x: 670, y: 382, text: 'Soldes', bg: '#E1F5EE' },
-      { type: 'testimonial', x: 250, y: 532, text: 'Qualité impeccable, livraison ultra rapide !|Clara B., Lyon', bg: '#BA7517' },
-      { type: 'cta',         x: 0,   y: 652, text: 'Découvrir toute la collection', bg: '#D85A30' },
-      { type: 'footer',      x: 0,   y: 742, text: 'Boutique', bg: '#1a1a1a' }
+      { type: 'card',        x: 30,  y: 360, text: 'Produit Vedette', bg: '#EEEDFE' },
+      { type: 'card',        x: 350, y: 360, text: 'Nouveauté', bg: '#E1F5EE' },
+      { type: 'card',        x: 670, y: 360, text: 'Best-seller', bg: '#FAECE7' },
+      { type: 'card',        x: 30,  y: 520, text: 'Édition limitée', bg: '#FAECE7' },
+      { type: 'card',        x: 350, y: 520, text: 'Collection été', bg: '#EEEDFE' },
+      { type: 'card',        x: 670, y: 520, text: 'Soldes', bg: '#E1F5EE' },
+      { type: 'testimonial', x: 250, y: 690, text: 'Qualité impeccable, livraison ultra rapide !|Clara B., Lyon', bg: '#BA7517' },
+      { type: 'cta',         x: 0,   y: 840, text: 'Découvrir toute la collection', bg: '#D85A30' },
+      { type: 'footer',      x: 0,   y: 940, text: 'Boutique', bg: '#1a1a1a' }
     ]
   },
   event: {
     name: 'Événement',
+    // countdown→120px, hero→260px, team→160px, steps→130px, map→180px
     blocks: [
-      { type: 'nav',       x: 0, y: 0,   text: 'WebSummit 2025|Programme|Intervenants|Lieu|S\'inscrire', bg: '#0d1117' },
-      { type: 'countdown', x: 0, y: 46,  text: "L'événement commence dans", bg: '#7F77DD' },
-      { type: 'hero',      x: 0, y: 166, text: '15 Avril 2025 — Paris, Grande Halle', bg: '#0d1117' },
-      { type: 'team',      x: 0, y: 306, text: 'Marie Curie · Keynote|Elon Chen · Startup|Ada Lin · IA & Tech|Jean Marc · Design', bg: '#1c2128' },
-      { type: 'steps',     x: 0, y: 486, text: 'Inscription · Réservez votre place|Confirmation · Recevez votre badge|Événement · Venez apprendre & networker', bg: '#EEEDFE' },
-      { type: 'map',       x: 0, y: 626, text: 'Grande Halle de la Villette, Paris 19ème', bg: '#e0e0e0' },
-      { type: 'cta',       x: 0, y: 806, text: 'Inscrivez-vous maintenant — Places limitées !', bg: '#D85A30' },
-      { type: 'footer',    x: 0, y: 896, text: 'WebSummit 2025', bg: '#0d1117' }
+      { type: 'nav',       x: 0, y: 0,    text: 'WebSummit 2025|Programme|Intervenants|Lieu|S\'inscrire', bg: '#0d1117' },
+      { type: 'countdown', x: 0, y: 46,   text: "L'événement commence dans", bg: '#7F77DD' },
+      { type: 'hero',      x: 0, y: 170,  text: '15 Avril 2025 — Paris, Grande Halle', bg: '#0d1117' },
+      { type: 'team',      x: 0, y: 440,  text: 'Marie Curie · Keynote|Elon Chen · Startup|Ada Lin · IA & Tech|Jean Marc · Design', bg: '#1c2128' },
+      { type: 'steps',     x: 0, y: 610,  text: 'Inscription · Réservez votre place|Confirmation · Recevez votre badge|Événement · Venez apprendre & networker', bg: '#EEEDFE' },
+      { type: 'map',       x: 0, y: 750,  text: 'Grande Halle de la Villette, Paris 19ème', bg: '#e0e0e0' },
+      { type: 'cta',       x: 0, y: 940,  text: 'Inscrivez-vous maintenant — Places limitées !', bg: '#D85A30' },
+      { type: 'footer',    x: 0, y: 1040, text: 'WebSummit 2025', bg: '#0d1117' }
     ]
   }
 };
